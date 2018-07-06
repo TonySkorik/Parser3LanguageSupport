@@ -24,7 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(disposable);
 	
 	let addDocumentingHeaderCommand = vscode.commands.registerCommand("extension.addDocumentingComment", ()=>{
-		let comment = "";
+		//let comment = "";
 		//vscode.TextEdit.insert(,comment);		
 	});
 
