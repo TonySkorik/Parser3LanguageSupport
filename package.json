@@ -1,0 +1,68 @@
+{
+    "name": "parser3-language-support",
+    "displayName": "Parser3 Language Support",
+    "description": "Parser3 language support. Based on the extension of Valerii Iatsko (viatsko.parser3)",
+    "version": "0.0.1",
+    "publisher": "tsoft",
+    "engines": {
+        "vscode": "^1.25.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Other"
+	],
+	"keywords": [
+		"parser3"
+	],
+	"preview": true,
+	"contributes": {
+		"languages": [{
+			"id": "parser3",
+			"aliases": ["parser3", "parser3"],
+			"extensions": [".p",".bp",".pp"],
+			"configuration": "./parser3.configuration.json"
+		}],
+		"grammars": [{
+			"language": "parser3",
+			"scopeName": "source.parser3",
+			"path": "./syntaxes/parser3.tmLanguage"
+		}],
+		"snippets": [{
+            "language": "parser3",
+            "path": "./snippets/snippets.json"
+        }],
+		"commands": [
+            {
+                "command": "extension.sayHello",
+                "title": "Hello World"
+			},
+			{
+				"command": "extension.addDocumentingComment",
+				"title": "Add Documenting Comment"
+			}
+        ]
+	},
+    "activationEvents": [
+		"onCommand:extension.sayHello",
+		"onCommand:extension.addDocumentingComment"
+    ],
+    "main": "./out/extension",    
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+	},
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/Microsoft/vscode-wordcount.git"
+    }
+}
