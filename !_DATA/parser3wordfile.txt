@@ -1,0 +1,81 @@
+/L10"Parser 3" Nocase HTML_LANG Line Comment = # Block Comment On = ^rem{ Block Comment Off = } Escape Char = \ String Chars = "' File Extensions = P HTML CONF htaccess
+/Delimiters = ~!%&*()+=|\{}[];"'<> ,	.?
+/Function String = "%@^([a-zA-Z0-9_;]+^[[a-zA-Z0-9_;]++^]^)["
+/Open Fold Strings = "[" "{"
+/Close Fold Strings = "]" "}"
+/C1"Elements"
+** <
+// />
+>
+<
+?>
+<? <?xml 
+]]>
+<![CDATA[
+/C2"Attributes"
+abbr= absolute= action= active= adj= adjFrom= adjTo= afiicode= age= agent= align= alink= all= allusion= alt= am= ana= ancestor= anchored= arity= assertedValue= attribute= authority=
+background= background-color= baseForm= baseType= behavior below bgcolor= border=
+calendar= cap= cause= cellpadding= cellspacing= cert= certainty= character= chars= children= class= classid= clear= code= codebase= codedCharSet= color= cols= colspan= complete= composite= content= content-role= coords= copyOf= corr= corresp= crdate= creator=
+data= date= dateCreated= dateUpdated= day= decls= definition= default= degree= delim= depend= depPtr= desc= descendant= descriptive= dim= dir= direct= direction discrete= doc= doctype= domains= dt:type= dt:values= dur=
+ed= encoding= end= end-indent= enjamb= entity= entityLoc= entitySet= entityStd= eol= exact= excl= exclude= expan= extendTarg= extent= evaluate= expand= event=
+face= feats= feature= field-width= first= first-line-start-indent= follow= following= font-family= font-family-name= font-posture= font-size= font-style= font-weight= for= form= frameborder= framespacing= from= fsd= full= function= fVal=
+gi= given= gradual= group= grpPtr=
+h= hand= has-value= height= hidden= hour= href= hspace= http-equiv=
+id= ident= image= included= inDegree= index= ink= inline= inst= interval= ismap= iso639= iterated=
+key=
+label= label2= lang= language= left-margin= lemma= length= level= level1= level2= level3= level4= lexpunc= lines= line-spacing= link= loc= location= locus= loop=
+macro= mailto= margin-bottom= margin-left= marginheight= margin-top= marginwidth= marker= marks= maxOccurs= mergedin= met= method= minOccurs= mlang= mode= multiple mutual= mutExcl=
+NSDef=
+n= name= names= new= next= nohref none= noresize norm= noshade notation= 
+occurs= old= onblur onchange= onclick onfocus onload only= onmouseout onmouseover onsubmit= opt= ord= order= org= orig= origin= outDegree=
+padding= parent= part= passive= pattern= per= perf= place= pm= position= prefix= prev= previous= prompt=
+quadding=
+real= reason= refunit= reg= rel= rend= render= required= resp= result= rev= rhyme= right-margin= role= rows= rowspan=
+sameAs= sample= scheme= scope= scribe= script= scrolling= select= selected sex= shape= show= sic= sigil= since= size= social= some= sort= source= space= space-after= space-before= span= split= src= SrcDef= standalone= start start= start-indent= status= string= style= subtype= synch=
+TEI= TEIForm= 
+target= targetEnd= targets= targFunc= targOrder= targType= terminal= text= text-align= theme= time= timezone= title= to= token= topmargin= trans= type=
+ucs-4= uniform= unit= url= usage= use=
+valign= value= valueTo= varSeq= version= vlink= vspace=
+weights= where= who= width= wit= wscale= wsd=
+xl-role= xl-title= xml:link= xmlns xmlns:dt xmlns:cmi
+zone=
+24hour=
+=
+-
+/C3"Brackets"
+}
+{
+)
+(
+[
+]
+/C4"Constructors"
+^date::create ^date::now 
+^file::load ^file::stat ^file::cgi ^file::exec 
+^hash::create ^hash::sql
+^image::measure ^image::create ^image::load 
+^table::create ^table::load ^table::sql 
+^xdoc::create ^xdoc::load 
+
+/C5"Variables and objects"
+** $
+
+/C6"Macros or method"
+** @ ^
+
+/C7"Static methods"
+^date:calendar
+^file:delete ^file:find ^file:list ^file:move ^file:dirname ^file:basename
+^file:justname ^file:justext ^file:fullpath ^file:lock
+^int:sql ^double:sql ^void:sql ^string:sql
+^mail:send
+^math:random ^math:round ^math:floor ^math:ceiling ^math:trunc ^math:frac
+^math:abs ^math:sign ^math:degrees ^math:radians ^math:sin ^math:asin ^math:cos
+^math:acos ^math:tan ^math:atan ^math:exp ^math:log ^math:pow ^math:sqrt
+^math:crypt ^math:md5 ^math:uuid ^math:uid64
+^memory:compact
+^response:clear
+
+/C8"Operators"
+^eval ^if ^switch ^case ^for ^while ^connect ^use 
+^cache ^process ^untaint ^taint ^try ^throw ^rem
