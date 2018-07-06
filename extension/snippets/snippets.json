@@ -1,0 +1,27 @@
+{
+    "DocumentingSummary": {
+        "prefix": "doc",
+        "body": [
+			"### <summary>",
+			"### ${1:summaryText}",
+			"### </summary>"			
+        ],
+        "description": "Insert dcumenting comment"
+	},
+	"DocumentingParameter": {
+        "prefix": "docparam",
+        "body": [
+			"### <param name=\"${1:paramName}\">${2:paramDescription}</param>"
+        ],
+        "description": "Insert parameter dcumenting comment"
+	},
+	"DocumentingRemarks": {
+        "prefix": "docremarks",
+        "body": [
+			"### <remarks>",
+			"### ${1:remarksText}",
+			"### </remarks>"
+        ],
+        "description": "Insert dcumenting comment"
+	}
+}

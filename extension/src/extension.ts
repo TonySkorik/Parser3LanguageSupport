@@ -9,23 +9,25 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations Parser3 Extended Language Support is now active!');
+    console.log('Parser3 Extended Language Support extension is now active!');
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
+	let addDocumentingHeaderCommand = vscode.commands.registerCommand("extension.addDocumentingComment", async ()=>{
+		let editor = vscode.window.activeTextEditor;
+		
+		if (!editor) {
+			vscode.window.showInformationMessage('Open a file first to insert comments');
+			return; // No open text editor
+		}
 
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    });
+		//let userInput = await vscode.window.showInputBox(); // get input from user
+		//vscode.window.showInformationMessage('Inputterd: ' + userInput); // show message window
+		
+		//let selection = editor.selection;
+		//let text = editor.document.getText(selection);
 
-	context.subscriptions.push(disposable);
-	
-	let addDocumentingHeaderCommand = vscode.commands.registerCommand("extension.addDocumentingComment", ()=>{
-		//let comment = "";
-		//vscode.TextEdit.insert(,comment);		
+		let sel = editor.selections;
+		
+		vscode.TextEdit.insert(new vscode.Position(0, 0), "Your advertisement here");
 	});
 
 	context.subscriptions.push(addDocumentingHeaderCommand);
