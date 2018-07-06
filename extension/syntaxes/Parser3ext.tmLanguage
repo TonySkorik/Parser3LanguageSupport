@@ -11,7 +11,7 @@
 	<key>foldingStopMarker</key>
 	<string>^\s*\}</string>
 	<key>name</key>
-	<string>Parser3</string>
+	<string>Parser3ext</string>
 	<key>patterns</key>
 	<array>
 
@@ -21,13 +21,13 @@
 			<key>match</key>
 			<string>\^(if|for|eval|process|while|s(witch|leep)|c(a(se|che)|on(nect|tinue))|t(aint|hrow|ry)|u(ntaint|se)|apply-taint|break)\b</string>
 			<key>name</key>
-			<string>keyword.operator.parser3</string>
+			<string>keyword.operator.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>\^#[0-9a-fA-F]{2}</string>
 			<key>name</key>
-			<string>constant.character.parser3</string>
+			<string>constant.character.parser3ext</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -42,13 +42,13 @@
 				</dict>
 			</array>
 			<key>name</key>
-			<string>comment.block.parser3</string>
+			<string>comment.block.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>^#.*</string>
 			<key>name</key>
-			<string>comment.line.parser3</string>
+			<string>comment.line.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -58,7 +58,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.parser3</string>
+					<string>constant.character.escape.parser3ext</string>
 				</dict>
 			</dict>
 		</dict>
@@ -66,13 +66,13 @@
 			<key>match</key>
 			<string>\^[\w\-]+::[\w\-]*\b</string>
 			<key>name</key>
-			<string>entity.name.function.constructor.parser3</string>
+			<string>entity.name.function.constructor.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>\$result\b(?![-_.:])</string>
 			<key>name</key>
-			<string>variable.language.result.parser3</string>
+			<string>variable.language.result.parser3ext</string>
 		</dict>
 
 
@@ -80,7 +80,7 @@
 			<key>match</key>
 			<string>^@[\w\-]*$</string>
 			<key>name</key>
-			<string>entity.name.function.parser3</string>
+			<string>entity.name.function.parser3ext</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -90,12 +90,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.definition.parser3</string>
+					<string>entity.name.function.definition.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.string.parser3</string>
+					<string>punctuation.section.string.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -105,16 +105,16 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.string.parser3</string>
+					<string>punctuation.section.string.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>comment.line.parser3</string>
+					<string>comment.line.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.definition.parser3</string>
+			<string>meta.function.definition.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -125,19 +125,19 @@
 					<key>match</key>
 					<string>\]\[</string>
 					<key>name</key>
-					<string>punctuation.section.string.parser3</string>
+					<string>punctuation.section.string.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>\bresult\b</string>
 					<key>name</key>
-					<string>variable.parameter.result.parser3</string>
+					<string>variable.parameter.result.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>\blocals\b</string>
 					<key>name</key>
-					<string>variable.parameter.locals.parser3</string>
+					<string>variable.parameter.locals.parser3ext</string>
 				</dict>
 			</array>
 		</dict>
@@ -153,11 +153,11 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.parser3</string>
+					<string>entity.name.function.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.function.definition.parser3</string>
+			<string>meta.function.definition.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -168,12 +168,12 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.function.parser3</string>
+							<string>entity.name.function.parser3ext</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.string.parser3</string>
+							<string>punctuation.section.string.parser3ext</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -183,7 +183,7 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.string.parser3</string>
+							<string>punctuation.section.string.parser3ext</string>
 						</dict>
 					</dict>
 					<key>patterns</key>
@@ -194,7 +194,7 @@
 						</dict>
 					</array>
 					<key>name</key>
-					<string>meta.parameters.parser3</string>
+					<string>meta.parameters.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -204,12 +204,12 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.function.parser3</string>
+							<string>entity.name.function.parser3ext</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>variable.other.parser3</string>
+							<string>variable.other.parser3ext</string>
 						</dict>
 					</dict>
 				</dict>
@@ -217,7 +217,7 @@
 					<key>match</key>
 					<string>(\.|:)[\w\-]*</string>
 					<key>name</key>
-					<string>entity.name.function.parser3</string>
+					<string>entity.name.function.parser3ext</string>
 				</dict>
 			</array>
 		</dict>
@@ -225,7 +225,7 @@
 
 		<dict>
 			<key>name</key>
-			<string>meta.variable.definition.parser3</string>
+			<string>meta.variable.definition.parser3ext</string>
 			<key>begin</key>
 			<string>(\$)(\{)(\w+)</string>
 			<key>beginCaptures</key>
@@ -233,17 +233,17 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.parser3</string>
+					<string>variable.other.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.code.parser3</string>
+					<string>punctuation.section.code.parser3ext</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.parser3</string>
+					<string>variable.other.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -253,7 +253,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.code.parser3</string>
+					<string>punctuation.section.code.parser3ext</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -271,7 +271,7 @@
 
 		<dict>
 			<key>name</key>
-			<string>meta.variable.definition.parser3</string>
+			<string>meta.variable.definition.parser3ext</string>
 			<key>begin</key>
 			<string>\$\.?[\w\-]*</string>
 			<key>end</key>
@@ -281,7 +281,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.parser3</string>
+					<string>variable.other.parser3ext</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -309,7 +309,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.expression.parser3</string>
+					<string>punctuation.section.expression.parser3ext</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -334,35 +334,35 @@
 					<key>match</key>
 					<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)((e|E)(\+|-)?[0-9]+)?))\b</string>
 					<key>name</key>
-					<string>constant.numeric.parser3</string>
+					<string>constant.numeric.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>\b(true|false)\b</string>
 					<key>name</key>
-					<string>constant.language.parser3</string>
+					<string>constant.language.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>\b(is|def|in|ne|eq|lt|gt|le|ge)\b</string>
 					<key>name</key>
-					<string>keyword.operator.parser3</string>
+					<string>keyword.operator.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>\B(-f|-d)\b</string>
 					<key>name</key>
-					<string>keyword.operator.parser3</string>
+					<string>keyword.operator.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>[-!%&amp;&lt;&gt;*+=/\\~|]</string>
 					<key>name</key>
-					<string>keyword.operator.symbolic.parser3</string>
+					<string>keyword.operator.symbolic.parser3ext</string>
 				</dict>
 			</array>
 			<key>name</key>
-			<string>meta.expression.parser3</string>
+			<string>meta.expression.parser3ext</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -374,7 +374,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.string.parser3</string>
+					<string>punctuation.section.string.parser3ext</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -389,7 +389,7 @@
 				</dict>
 			</array>
 			<key>name</key>
-			<string>meta.string.parser3</string>
+			<string>meta.string.parser3ext</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -401,7 +401,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.code.parser3</string>
+					<string>punctuation.section.code.parser3ext</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -416,7 +416,7 @@
 				</dict>
 			</array>
 			<key>name</key>
-			<string>meta.code.parser3</string>
+			<string>meta.code.parser3ext</string>
 		</dict>
 
 		<!-- HTML GRAMMAR -->
@@ -429,12 +429,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.begin.html.parser3</string>
+					<string>punctuation.definition.tag.begin.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.tag.html.parser3</string>
+					<string>entity.name.tag.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -444,31 +444,31 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.end.html.parser3</string>
+					<string>punctuation.definition.tag.end.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.begin.html meta.scope.between-tag-pair.html.parser3</string>
+					<string>punctuation.definition.tag.begin.html meta.scope.between-tag-pair.html.parser3ext</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.begin.html.parser3</string>
+					<string>punctuation.definition.tag.begin.html.parser3ext</string>
 				</dict>
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.tag.html.parser3</string>
+					<string>entity.name.tag.html.parser3ext</string>
 				</dict>
 				<key>5</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.end.html.parser3</string>
+					<string>punctuation.definition.tag.end.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.tag.any.html.parser3</string>
+			<string>meta.tag.any.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -485,18 +485,18 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.html.parser3</string>
+					<string>punctuation.definition.tag.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.tag.xml.html.parser3</string>
+					<string>entity.name.tag.xml.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
 			<string>(\?&gt;)</string>
 			<key>name</key>
-			<string>meta.tag.preprocessor.xml.html.parser3</string>
+			<string>meta.tag.preprocessor.xml.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -521,20 +521,20 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.comment.html.parser3</string>
+					<string>punctuation.definition.comment.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
 			<string>--\s*&gt;</string>
 			<key>name</key>
-			<string>comment.block.html.parser3</string>
+			<string>comment.block.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>match</key>
 					<string>--</string>
 					<key>name</key>
-					<string>invalid.illegal.bad-comments-or-CDATA.html.parser3</string>
+					<string>invalid.illegal.bad-comments-or-CDATA.html.parser3ext</string>
 				</dict>
 			</array>
 		</dict>
@@ -546,13 +546,13 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.html.parser3</string>
+					<string>punctuation.definition.tag.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
 			<string>&gt;</string>
 			<key>name</key>
-			<string>meta.tag.sgml.html.parser3</string>
+			<string>meta.tag.sgml.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -563,20 +563,20 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.tag.doctype.html.parser3</string>
+							<string>entity.name.tag.doctype.html.parser3ext</string>
 						</dict>
 					</dict>
 					<key>end</key>
 					<string>(?=&gt;)</string>
 					<key>name</key>
-					<string>meta.tag.sgml.doctype.html.parser3</string>
+					<string>meta.tag.sgml.doctype.html.parser3ext</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>match</key>
 							<string>"[^"&gt;]*"</string>
 							<key>name</key>
-							<string>string.quoted.double.doctype.identifiers-and-DTDs.html.parser3</string>
+							<string>string.quoted.double.doctype.identifiers-and-DTDs.html.parser3ext</string>
 						</dict>
 					</array>
 				</dict>
@@ -586,13 +586,13 @@
 					<key>end</key>
 					<string>]](?=&gt;)</string>
 					<key>name</key>
-					<string>constant.other.inline-data.html.parser3</string>
+					<string>constant.other.inline-data.html.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(\s*)(?!--|&gt;)\S(\s*)</string>
 					<key>name</key>
-					<string>invalid.illegal.bad-comments-or-CDATA.html.parser3</string>
+					<string>invalid.illegal.bad-comments-or-CDATA.html.parser3ext</string>
 				</dict>
 			</array>
 		</dict>
@@ -604,12 +604,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.begin.html.parser3</string>
+					<string>punctuation.definition.tag.begin.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.tag.structure.any.html.parser3</string>
+					<string>entity.name.tag.structure.any.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -619,11 +619,11 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.end.html.parser3</string>
+					<string>punctuation.definition.tag.end.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.tag.structure.any.html.parser3</string>
+			<string>meta.tag.structure.any.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -640,12 +640,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.begin.html.parser3</string>
+					<string>punctuation.definition.tag.begin.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.tag.block.any.html.parser3</string>
+					<string>entity.name.tag.block.any.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -655,11 +655,11 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.end.html.parser3</string>
+					<string>punctuation.definition.tag.end.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.tag.block.any.html.parser3</string>
+			<string>meta.tag.block.any.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -676,12 +676,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.begin.html.parser3</string>
+					<string>punctuation.definition.tag.begin.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.tag.inline.any.html.parser3</string>
+					<string>entity.name.tag.inline.any.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -691,11 +691,11 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.end.html.parser3</string>
+					<string>punctuation.definition.tag.end.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.tag.inline.any.html.parser3</string>
+			<string>meta.tag.inline.any.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -712,12 +712,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.begin.html.parser3</string>
+					<string>punctuation.definition.tag.begin.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.tag.other.html.parser3</string>
+					<string>entity.name.tag.other.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -727,11 +727,11 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.end.html.parser3</string>
+					<string>punctuation.definition.tag.end.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.tag.other.html.parser3</string>
+			<string>meta.tag.other.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -753,23 +753,23 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.create.sql.parser3</string>
+					<string>keyword.other.create.sql.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.sql.parser3</string>
+					<string>keyword.other.sql.parser3ext</string>
 				</dict>
 				<key>5</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.sql.parser3</string>
+					<string>entity.name.function.sql.parser3ext</string>
 				</dict>
 			</dict>
 			<key>match</key>
 			<string>(?i:^\s*(create)\s+(aggregate|conversion|database|domain|function|group|(unique\s+)?index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\s+)(['"`]?)(\w+)\4</string>
 			<key>name</key>
-			<string>meta.create.sql.parser3</string>
+			<string>meta.create.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -777,18 +777,18 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.create.sql.parser3</string>
+					<string>keyword.other.create.sql.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.sql.parser3</string>
+					<string>keyword.other.sql.parser3ext</string>
 				</dict>
 			</dict>
 			<key>match</key>
 			<string>(?i:^\s*(drop)\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view))</string>
 			<key>name</key>
-			<string>meta.drop.sql.parser3</string>
+			<string>meta.drop.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -796,28 +796,28 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.create.sql.parser3</string>
+					<string>keyword.other.create.sql.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.table.sql.parser3</string>
+					<string>keyword.other.table.sql.parser3ext</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.sql.parser3</string>
+					<string>entity.name.function.sql.parser3ext</string>
 				</dict>
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.cascade.sql.parser3</string>
+					<string>keyword.other.cascade.sql.parser3ext</string>
 				</dict>
 			</dict>
 			<key>match</key>
 			<string>(?i:\s*(drop)\s+(table)\s+(\w+)(\s+cascade)?\b)</string>
 			<key>name</key>
-			<string>meta.drop.sql.parser3</string>
+			<string>meta.drop.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -825,78 +825,78 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.create.sql.parser3</string>
+					<string>keyword.other.create.sql.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.table.sql.parser3</string>
+					<string>keyword.other.table.sql.parser3ext</string>
 				</dict>
 			</dict>
 			<key>match</key>
 			<string>(?i:^\s*(alter)\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\s+)</string>
 			<key>name</key>
-			<string>meta.alter.sql.parser3</string>
+			<string>meta.alter.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:\b((?:primary|foreign)\s+key|references|on\sdelete(\s+cascade)?|check|constraint)\b)</string>
 			<key>name</key>
-			<string>storage.modifier.sql.parser3</string>
+			<string>storage.modifier.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:\b(select(\s+distinct)?|insert\s+(ignore\s+)?into|update|delete|from|set|where|group\sby|or|like|and|union(\s+all)?|having|order\sby|limit|(inner|cross)\s+join|straight_join|(left|right)(\s+outer)?\s+join|natural(\s+(left|right)(\s+outer)?)?\s+join)\b)</string>
 			<key>name</key>
-			<string>keyword.other.DML.sql.parser3</string>
+			<string>keyword.other.DML.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:\b(on|((is\s+)?not\s+)?null)\b)</string>
 			<key>name</key>
-			<string>keyword.other.DDL.create.II.sql.parser3</string>
+			<string>keyword.other.DDL.create.II.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:\bvalues\b)</string>
 			<key>name</key>
-			<string>keyword.other.DML.II.sql.parser3</string>
+			<string>keyword.other.DML.II.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:\b(begin(\s+work)?|start\s+transaction|commit(\s+work)?|rollback(\s+work)?)\b)</string>
 			<key>name</key>
-			<string>keyword.other.LUW.sql.parser3</string>
+			<string>keyword.other.LUW.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:\b(grant(\swith\sgrant\soption)?|revoke)\b)</string>
 			<key>name</key>
-			<string>keyword.other.authorization.sql.parser3</string>
+			<string>keyword.other.authorization.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:\bin\b)</string>
 			<key>name</key>
-			<string>keyword.other.data-integrity.sql.parser3</string>
+			<string>keyword.other.data-integrity.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i:^\s*(comment\s+on\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\s+.*?\s+(is)\s+)</string>
 			<key>name</key>
-			<string>keyword.other.object-comments.sql.parser3</string>
+			<string>keyword.other.object-comments.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i)\bAS\b</string>
 			<key>name</key>
-			<string>keyword.other.alias.sql.parser3</string>
+			<string>keyword.other.alias.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i)\b(DESC|ASC)\b</string>
 			<key>name</key>
-			<string>keyword.other.order.sql.parser3</string>
+			<string>keyword.other.order.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -904,7 +904,7 @@
 			<key>match</key>
 			<string>(?i)\b(CURRENT_(DATE|TIME(STAMP)?|USER)|(SESSION|SYSTEM)_USER)\b</string>
 			<key>name</key>
-			<string>support.function.scalar.sql.parser3</string>
+			<string>support.function.scalar.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>comment</key>
@@ -912,13 +912,13 @@
 			<key>match</key>
 			<string>(?i)\b(AVG|COUNT|MIN|MAX|SUM)(?=\s*\()</string>
 			<key>name</key>
-			<string>support.function.aggregate.sql.parser3</string>
+			<string>support.function.aggregate.sql.parser3ext</string>
 		</dict>
 		<dict>
 			<key>match</key>
 			<string>(?i)\b(CONCATENATE|CONVERT|LOWER|SUBSTRING|TRANSLATE|TRIM|UPPER)\b</string>
 			<key>name</key>
-			<string>support.function.string.sql.parser3</string>
+			<string>support.function.string.sql.parser3ext</string>
 		</dict>
 	</array>
 	
@@ -931,7 +931,7 @@
 			<key>match</key>
 			<string>;</string>
 			<key>name</key>
-			<string>punctuation.separator.parser3</string>
+			<string>punctuation.separator.parser3ext</string>
 		</dict>
 		<key>rem-insider</key>
 		<dict>
@@ -954,7 +954,7 @@
 			<key>end</key>
 			<string>'</string>
 			<key>name</key>
-			<string>string.quoted.single.parser3</string>
+			<string>string.quoted.single.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -970,7 +970,7 @@
 			<key>end</key>
 			<string>"</string>
 			<key>name</key>
-			<string>string.quoted.double.parser3</string>
+			<string>string.quoted.double.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -988,12 +988,12 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.parser3</string>
+					<string>variable.other.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.string.parser3</string>
+					<string>punctuation.section.string.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -1003,7 +1003,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.string.parser3</string>
+					<string>punctuation.section.string.parser3ext</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -1014,14 +1014,14 @@
 				</dict>
 			</array>
 			<key>name</key>
-			<string>meta.parameters.parser3</string>
+			<string>meta.parameters.parser3ext</string>
 		</dict>
 		<key>variable-branch</key>
 		<dict>
 			<key>match</key>
 			<string>[.:]\$?[\w\-]*</string>
 			<key>name</key>
-			<string>variable.other.parser3</string>
+			<string>variable.other.parser3ext</string>
 		</dict>	
 
 		<!-- HTML -->
@@ -1036,24 +1036,24 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.entity.html.parser3</string>
+							<string>punctuation.definition.entity.html.parser3ext</string>
 						</dict>
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.entity.html.parser3</string>
+							<string>punctuation.definition.entity.html.parser3ext</string>
 						</dict>
 					</dict>
 					<key>match</key>
 					<string>(&amp;)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)</string>
 					<key>name</key>
-					<string>constant.character.entity.html.parser3</string>
+					<string>constant.character.entity.html.parser3ext</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>&amp;</string>
 					<key>name</key>
-					<string>invalid.illegal.bad-ampersand.html.parser3</string>
+					<string>invalid.illegal.bad-ampersand.html.parser3ext</string>
 				</dict>
 			</array>
 		</dict>
@@ -1066,7 +1066,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.string.begin.html.parser3</string>
+					<string>punctuation.definition.string.begin.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -1076,11 +1076,11 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.string.end.html.parser3</string>
+					<string>punctuation.definition.string.end.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.html.parser3</string>
+			<string>string.quoted.double.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1098,7 +1098,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.string.begin.html.parser3</string>
+					<string>punctuation.definition.string.begin.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -1108,11 +1108,11 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.string.end.html.parser3</string>
+					<string>punctuation.definition.string.end.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.single.html.parser3</string>
+			<string>string.quoted.single.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1126,7 +1126,7 @@
 			<key>match</key>
 			<string>\b([a-zA-Z\-:]+\s*=)</string>
 			<key>name</key>
-			<string>entity.other.attribute-name.html.parser3</string>
+			<string>entity.other.attribute-name.html.parser3ext</string>
 		</dict>
 		<!-- <key>tag-id-attribute</key>
 		<dict>
@@ -1137,18 +1137,18 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>entity.other.attribute-name.id.html.parser3</string>
+					<string>entity.other.attribute-name.id.html.parser3ext</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.separator.key-value.html.parser3</string>
+					<string>punctuation.separator.key-value.html.parser3ext</string>
 				</dict>
 			</dict>
 			<key>end</key>
 			<string>(?&lt;='|")</string>
 			<key>name</key>
-			<string>meta.attribute-with-value.id.html.parser3</string>
+			<string>meta.attribute-with-value.id.html.parser3ext</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1159,11 +1159,11 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.string.begin.html.parser3</string>
+							<string>punctuation.definition.string.begin.html.parser3ext</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>meta.toc-list.id.html.parser3</string>
+					<string>meta.toc-list.id.html.parser3ext</string>
 					<key>end</key>
 					<string>"</string>
 					<key>endCaptures</key>
@@ -1171,11 +1171,11 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.string.end.html.parser3</string>
+							<string>punctuation.definition.string.end.html.parser3ext</string>
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>string.quoted.double.html.parser3</string>
+					<string>string.quoted.double.html.parser3ext</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1192,11 +1192,11 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.string.begin.html.parser3</string>
+							<string>punctuation.definition.string.begin.html.parser3ext</string>
 						</dict>
 					</dict>
 					<key>contentName</key>
-					<string>meta.toc-list.id.html.parser3</string>
+					<string>meta.toc-list.id.html.parser3ext</string>
 					<key>end</key>
 					<string>'</string>
 					<key>endCaptures</key>
@@ -1204,11 +1204,11 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.string.end.html.parser3</string>
+							<string>punctuation.definition.string.end.html.parser3ext</string>
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>string.quoted.single.html.parser3</string>
+					<string>string.quoted.single.html.parser3ext</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1244,7 +1244,7 @@
 	</dict>
 
 	<key>scopeName</key>
-	<string>source.parser3</string>
+	<string>source.parser3ext</string>
 	<key>uuid</key>
 	<string>AF64B54B-CA02-4B85-9D8E-898CD3FF98C8</string>
 </dict>

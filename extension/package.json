@@ -2,7 +2,7 @@
     "name": "parser3-language-support",
     "displayName": "Parser3 Language Support",
     "description": "Parser3 language support. Based on the extension of Valerii Iatsko (viatsko.parser3)",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "tsoft",
     "engines": {
         "vscode": "^1.25.0"
@@ -12,23 +12,23 @@
 		"Other"
 	],
 	"keywords": [
-		"parser3"
+		"parser3", "parser3-ext", "parser3ext"
 	],
 	"preview": true,
 	"contributes": {
 		"languages": [{
-			"id": "parser3",
-			"aliases": ["parser3", "parser3"],
+			"id": "parser3ext",
+			"aliases": ["parser3ext", "parser3ext", "parser3-ext"],
 			"extensions": [".p",".bp",".pp"],
-			"configuration": "./parser3.configuration.json"
+			"configuration": "./parser3ext.configuration.json"
 		}],
 		"grammars": [{
-			"language": "parser3",
-			"scopeName": "source.parser3",
-			"path": "./syntaxes/parser3.tmLanguage"
+			"language": "parser3ext",
+			"scopeName": "source.parser3ext",
+			"path": "./syntaxes/parser3ext.tmLanguage"
 		}],
 		"snippets": [{
-            "language": "parser3",
+            "language": "parser3ext",
             "path": "./snippets/snippets.json"
         }],
 		"commands": [
