@@ -1,7 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import { Config } from './Config';
+//import { Config } from './Config';
 
 export class EditorHelper{
 	public static GetCurrentString(editor : vscode.TextEditor, selection : vscode.Selection):string{
