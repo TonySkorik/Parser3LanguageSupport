@@ -14,9 +14,15 @@
 	"keywords": [
 		"parser3",
 		"parser3-ext",
-		"parser3ext"
+		"parser3ext",
+		"parser3 ext",
+		"Parser 3"
 	],
 	"preview": true,
+	"galleryBanner": {
+		"color": "#41205f",
+		"theme": "dark"
+	},
 	"contributes": {
 		"languages": [
 			{

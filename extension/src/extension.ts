@@ -15,8 +15,6 @@ export function activate(context: vscode.ExtensionContext) {
     // This line of code will only be executed once when your extension is activated
     console.log('Parser3 Extended Language Support extension is now active!');
 
-	const P3_MODE: vscode.DocumentFilter = { language: 'parser3ext', scheme: 'file' };
-
 	var documentationHelper = new DocumentationHelper();
 
 	let addDocumentingHeaderCommand = vscode.commands.registerCommand("extension.addDocumentingComment", ()=>{
@@ -46,9 +44,10 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(addDocumentingHeaderWithRemarksCommand);
 
 	// definition provider
-	context.subscriptions.push(
-        vscode.languages.registerDefinitionProvider(
-            P3_MODE, new Parser3DefinitionProvider()));
+	const P3_MODE: vscode.DocumentFilter = { language: 'parser3ext', scheme: '*' };
+
+	let definitionProvider = vscode.languages.registerDefinitionProvider(P3_MODE, new Parser3DefinitionProvider());
+	context.subscriptions.push(definitionProvider);
 }
 
 // this method is called when your extension is deactivated
