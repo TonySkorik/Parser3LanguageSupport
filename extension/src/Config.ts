@@ -12,7 +12,7 @@ export class Config {
         return Config.configuration.get(val) as T;
     }
 
-    public static get getIsForceCursorOnLineStart(): boolean {
+    public static get IsForceCursorOnLineStart(): boolean {
         return Config.getSettings<boolean>('forceCursorOnTheLineStart');
 	}
 }

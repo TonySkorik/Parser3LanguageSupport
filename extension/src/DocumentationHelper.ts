@@ -5,27 +5,27 @@ import { Config } from './Config';
 
 export class DocumentationHelper {
 
-	private GetCurrentString(editor : vscode.TextEditor, selection : vscode.Selection){
+	private GetCurrentString(editor : vscode.TextEditor, selection : vscode.Selection):string{
 		let lineSelection = selection.end.translate(0,10000);
 		return editor.document.getText(new vscode.Selection(selection.start, lineSelection)).trim();
 	}
 	
-	private ExpandSelection(selection:vscode.Selection){
+	private ExpandSelection(selection:vscode.Selection):vscode.Selection{
 		let nextLine = selection.end.translate(1,0);
 		return new vscode.Selection(selection.start, nextLine);
 	}
 	
-	private InsertNewLine(editor : vscode.TextEditor, selection : vscode.Selection){
+	private InsertNewLine(editor : vscode.TextEditor, selection : vscode.Selection):void{
 		let newLineSnippet = new vscode.SnippetString("\n");
 		editor.insertSnippet(newLineSnippet,selection.start);
 	}
 	
-	private MoveCursorToTheLineStart(editor: vscode.TextEditor, selection : vscode.Selection){
+	private MoveCursorToTheLineStart(editor: vscode.TextEditor, selection : vscode.Selection):vscode.Selection{
 		editor.selection = new vscode.Selection(new vscode.Position(selection.start.line,0),new vscode.Position(selection.start.line,0));
 		return editor.selection;
 	}
 	
-	private async GetInputFromUser(descriptiveMessage : string, placeholder:string){
+	private async GetInputFromUser(descriptiveMessage : string, placeholder:string):Promise<string>{
 		let userInput = await vscode.window.showInputBox({
 			prompt:descriptiveMessage,
 			placeHolder:placeholder
@@ -36,7 +36,7 @@ export class DocumentationHelper {
 		return userInput;
 	}
 	
-	private GetMethodArguments(signatureString:string){
+	private GetMethodArguments(signatureString:string):string[]{
 		let foundArguments : string[] = [];
 		
 		let pattern = /@\w+\[([^\[]*)\]/;
@@ -56,7 +56,7 @@ export class DocumentationHelper {
 		return foundArguments;
 	}
 	
-	private AnalyzeArgumentType(argumentName : string){
+	private AnalyzeArgumentType(argumentName : string) : string {
 		if(argumentName.startsWith("is")){
 			return "Boolean";
 		}
@@ -74,10 +74,10 @@ export class DocumentationHelper {
 		}
 	}
 	
-	public async InsertDocumentingComment(editor : vscode.TextEditor, isInsertRemarks:boolean=false){
+	public async InsertDocumentingComment(editor : vscode.TextEditor, isInsertRemarks:boolean=false):Promise<boolean>{
 		let selection = editor.selection;
 	
-		if(Config.getIsForceCursorOnLineStart){
+		if(Config.IsForceCursorOnLineStart){
 			selection = this.MoveCursorToTheLineStart(editor, selection);
 		}
 	
@@ -102,9 +102,7 @@ export class DocumentationHelper {
 				vscode.window.showErrorMessage('Unable to find method signature. Signature should be on the cursor line or on the next one and start with @-sign.');
 				return false;
 			   }
-			
-			console.log("Non-empty string found on the "+cursorOffset+" line after cursor");
-	
+				
 			if(cursorOffset===0){
 				// means that cursor stands directly on signature
 				this.InsertNewLine(editor, computedSelection);						
