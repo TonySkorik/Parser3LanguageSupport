@@ -21,12 +21,17 @@ function InsertNewLine(editor : vscode.TextEditor, selection : vscode.Selection)
 	editor.insertSnippet(newLineSnippet,selection.start);
 }
 
+function MoveCursorToTheLineStart(editor: vscode.TextEditor, selection : vscode.Selection){
+	editor.selection = new vscode.Selection(new vscode.Position(selection.start.line,0),new vscode.Position(selection.start.line,0));
+	return editor.selection;
+}
+
 async function GetInputFromUser(descriptiveMessage : string, placeholder:string){
 	let userInput = await vscode.window.showInputBox({
 		prompt:descriptiveMessage,
 		placeHolder:placeholder
 	});
-	if(userInput === undefined){
+	if(userInput === undefined || userInput === ""){
 		return placeholder;
 	}
 	return userInput;
@@ -40,6 +45,7 @@ function GetMethodArguments(signatureString:string){
 	let results = pattern.exec(signatureString);
 	
 	if(results !== null){
+		results.shift();
 		results.forEach(r=>{
 			let parts = r.split(";");
 			parts.forEach(p=>{
@@ -52,18 +58,28 @@ function GetMethodArguments(signatureString:string){
 }
 
 function AnalyzeArgumentType(argumentName : string){
-	
-	return argumentName;
+	if(argumentName.startsWith("is")){
+		return "Boolean";
+	}
+	switch(argumentName.substr(0,1)){
+		case "h":
+			return "Hash";
+		case "t":
+			return "Table";
+		case "b":
+			return "Boolean";
+		case "i":
+			return "Integer";
+		default :
+			return argumentName;		
+	}
 }
 
 async function InsertDocumentingComment(editor : vscode.TextEditor, isInsertRemarks:boolean=false){
 	let selection = editor.selection;
 
-	let isForceCursorOnLineStart = Config.getIsForceCursorOnLineStart;
-
-	if(isForceCursorOnLineStart){
-		editor.selection = new vscode.Selection(new vscode.Position(selection.start.line,0),new vscode.Position(selection.start.line,0));
-		selection = editor.selection;			
+	if(Config.getIsForceCursorOnLineStart){
+		selection = MoveCursorToTheLineStart(editor, selection);
 	}
 
 	if(selection.start.character !== 0){
@@ -103,21 +119,22 @@ async function InsertDocumentingComment(editor : vscode.TextEditor, isInsertRema
 		await editor.insertSnippet(mainSnippetString,computedSelection.start);
 
 		//insert argument snippets
-		// if(methodArguments.length>0){
-		// 	InsertNewLine(editor,editor.selection);
+		if(methodArguments.length>0){
+			for(let i=0; i<methodArguments.length; i++){
+				let arg = methodArguments[i];
+				InsertNewLine(editor,editor.selection);
+				let paramDescription = await GetInputFromUser("Please provide description fo method argument "+arg, AnalyzeArgumentType(arg));
 
-		// 	methodArguments.forEach(async arg => {
-		// 		let paramDescription = await GetInputFromUser("Please provide description fo method argument "+arg, AnalyzeArgumentType(arg));
-
-		// 		let paramSnippetString = new vscode.SnippetString("### <param name=\""+arg+"\">"+paramDescription+"</param>\n");	
-		// 		await editor.insertSnippet(paramSnippetString,editor.selection.active.translate(1,0));
-		//  	});
-		// }
+				let paramSnippetString = new vscode.SnippetString("### <param name=\""+arg+"\">"+paramDescription+"</param>");	
+				await editor.insertSnippet(paramSnippetString,editor.selection.active);
+			}
+		}
 		
 		// insert remarks snippet
 		if(isInsertRemarks){
-			let remarksSnippetString = new vscode.SnippetString("### <remarks>\n### ${1:remarksText}\n### </remarks>\n");
-			await editor.insertSnippet(remarksSnippetString,editor.selection.active.translate(1,0));
+			InsertNewLine(editor,editor.selection);
+			let remarksSnippetString = new vscode.SnippetString("### <remarks>\n### ${1:remarksText}\n### </remarks>");
+			await editor.insertSnippet(remarksSnippetString,editor.selection.active);
 		}
 
 		return true;
