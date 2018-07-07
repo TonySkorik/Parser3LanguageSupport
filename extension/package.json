@@ -75,6 +75,7 @@
 		}
 	},
 	"activationEvents": [
+		"onLanguage:parser3ext",
 		"onCommand:extension.addDocumentingComment",
 		"onCommand:extension.addDocumentingCommentWithRemarks"
 	],
