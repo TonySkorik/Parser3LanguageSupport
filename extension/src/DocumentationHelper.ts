@@ -101,7 +101,7 @@ export class DocumentationHelper {
 			if(possibleSignature==="" || !possibleSignature.startsWith("@")){
 				vscode.window.showErrorMessage('Unable to find method signature. Signature should be on the cursor line or on the next one and start with @-sign.');
 				return false;
-			   }
+			}
 				
 			if(cursorOffset===0){
 				// means that cursor stands directly on signature
