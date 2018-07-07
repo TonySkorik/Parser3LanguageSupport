@@ -74,7 +74,12 @@
 			<key>name</key>
 			<string>variable.language.result.parser3ext</string>
 		</dict>
-
+		<dict>
+			<key>match</key>
+			<string>(?<=\[)DEFAULT(?=\])</string>
+			<key>name</key>
+			<string>variable.language.DEFAULT.parser3ext</string>
+		</dict>
 
 		<dict>
 			<key>match</key>

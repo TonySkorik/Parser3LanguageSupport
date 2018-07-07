@@ -1,67 +1,95 @@
 {
-    "name": "parser3-language-support",
-    "displayName": "Parser3 Language Support",
-    "description": "Parser3 language support. Based on the extension of Valerii Iatsko (viatsko.parser3)",
-    "version": "0.0.2",
-    "publisher": "tsoft",
-    "engines": {
-        "vscode": "^1.25.0"
+	"name": "parser3-language-support",
+	"displayName": "Parser3 Language Support",
+	"description": "Parser3 language support. Inspired by the extension by Valerii Iatsko (viatsko.parser3)",
+	"version": "0.0.3",
+	"publisher": "tsoft",
+	"engines": {
+		"vscode": "^1.25.0"
 	},
 	"categories": [
 		"Programming Languages",
 		"Other"
 	],
 	"keywords": [
-		"parser3", "parser3-ext", "parser3ext"
+		"parser3",
+		"parser3-ext",
+		"parser3ext"
 	],
 	"preview": true,
 	"contributes": {
-		"languages": [{
-			"id": "parser3ext",
-			"aliases": ["parser3ext", "parser3ext", "parser3-ext"],
-			"extensions": [".p",".bp",".pp"],
-			"configuration": "./parser3ext.configuration.json"
-		}],
-		"grammars": [{
-			"language": "parser3ext",
-			"scopeName": "source.parser3ext",
-			"path": "./syntaxes/Parser3ext.tmLanguage"
-		}],
-		"snippets": [{
-            "language": "parser3ext",
-            "path": "./snippets/snippets.json"
-        }],
+		"languages": [
+			{
+				"id": "parser3ext",
+				"aliases": [
+					"parser3ext",
+					"parser3ext",
+					"parser3-ext"
+				],
+				"extensions": [
+					".p",
+					".bp",
+					".pp"
+				],
+				"configuration": "./parser3ext.configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "parser3ext",
+				"scopeName": "source.parser3ext",
+				"path": "./syntaxes/Parser3ext.tmLanguage"
+			}
+		],
+		"snippets": [
+			{
+				"language": "parser3ext",
+				"path": "./snippets/snippets.json"
+			}
+		],
 		"commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-			},
 			{
 				"command": "extension.addDocumentingComment",
 				"title": "Add Documenting Comment"
+			},
+			{
+				"command": "extension.addDocumentingCommentWithRemarks",
+				"title": "Add Documenting Comment With Remarks"
 			}
-        ]
+		],
+		"configuration": {
+			"title": "Parser3 Language Support Config",
+			"properties": {
+				"parser3ext.settings.forceCursorOnTheLineStart": {
+					"type": "boolean",
+					"default": true,
+					"description": "Move the cursor on the line start upon InsertDocumentingHeaderInvocation. If set to false and invoked - the warning will be displayed and nothing happens."
+				}
+			}
+		}
 	},
-    "activationEvents": [
-		"onCommand:extension.addDocumentingComment"
-    ],
-    "main": "./out/extension",    
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "tslint": "^5.8.0",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+	"activationEvents": [
+		"onCommand:extension.addDocumentingComment",
+		"onCommand:extension.addDocumentingCommentWithRemarks"
+	],
+	"main": "./out/extension",
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
 	},
+	"devDependencies": {
+		"typescript": "^2.6.1",
+		"vscode": "^1.1.6",
+		"tslint": "^5.8.0",
+		"@types/node": "^7.0.43",
+		"@types/mocha": "^2.2.42"
+	},
+	"license": "MIT",
 	"repository": {
-        "type": "git",
-        "url": "https://github.com/Microsoft/vscode-wordcount.git"
-    }
+		"type": "git",
+		"url": "https://github.com/T-Soft/Parser3LanguageSupport.git"
+	}
 }
