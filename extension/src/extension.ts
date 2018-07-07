@@ -155,7 +155,7 @@ export function activate(context: vscode.ExtensionContext) {
     // This line of code will only be executed once when your extension is activated
     console.log('Parser3 Extended Language Support extension is now active!');
 
-	let addDocumentingHeaderCommand = vscode.commands.registerCommand("extension.addDocumentingComment", async ()=>{
+	let addDocumentingHeaderCommand = vscode.commands.registerCommand("extension.addDocumentingComment", ()=>{
 		let editor = vscode.window.activeTextEditor;
 		
 		if (!editor) {
@@ -166,7 +166,7 @@ export function activate(context: vscode.ExtensionContext) {
 		InsertDocumentingComment(editor);
 	});
 
-	let addDocumentingHeaderWithRemarksCommand = vscode.commands.registerCommand("extension.addDocumentingCommentWithRemarks", async ()=>{
+	let addDocumentingHeaderWithRemarksCommand = vscode.commands.registerCommand("extension.addDocumentingCommentWithRemarks", ()=>{
 		let editor = vscode.window.activeTextEditor;
 		
 		if (!editor) {
