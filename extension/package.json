@@ -2,13 +2,14 @@
 	"name": "parser3-language-support",
 	"displayName": "Parser3 Language Support",
 	"description": "Parser3 language support. Inspired by the extension by Valerii Iatsko (viatsko.parser3)",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "tsoft",
 	"engines": {
 		"vscode": "^1.25.0"
 	},
 	"categories": [
 		"Programming Languages",
+		"Snippets",
 		"Other"
 	],
 	"keywords": [
@@ -75,9 +76,7 @@
 		}
 	},
 	"activationEvents": [
-		"onLanguage:parser3ext",
-		"onCommand:extension.addDocumentingComment",
-		"onCommand:extension.addDocumentingCommentWithRemarks"
+		"onLanguage:parser3ext"
 	],
 	"main": "./out/extension",
 	"scripts": {
