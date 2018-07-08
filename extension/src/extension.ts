@@ -4,6 +4,7 @@
 import * as vscode from 'vscode';
 import { DocumentationHelper } from './DocumentationHelper';
 import { Parser3DefinitionProvider } from './Parser3DefinitionProvider';
+import { Parser3HoverProvider } from './Parser3HoverProvider';
 
 //==================================================================================================
 
@@ -45,9 +46,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// definition provider
 	const P3_MODE: vscode.DocumentFilter = { language: 'parser3ext', scheme: '*' };
+	
+	// TODO: this service would be implemented through Psharp
+	//context.subscriptions.push(vscode.languages.registerDefinitionProvider(P3_MODE, new Parser3DefinitionProvider()));
+	// end TODO: this service would be implemented through Psharp
 
-	let definitionProvider = vscode.languages.registerDefinitionProvider(P3_MODE, new Parser3DefinitionProvider());
-	context.subscriptions.push(definitionProvider);
+	// hover provider
+	context.subscriptions.push(vscode.languages.registerHoverProvider(P3_MODE, new Parser3HoverProvider()));
 }
 
 // this method is called when your extension is deactivated

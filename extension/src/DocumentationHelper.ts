@@ -19,6 +19,8 @@ export class DocumentationHelper {
 				return "Boolean";
 			case "i":
 				return "Integer";
+			case "s":
+				return "String";
 			default :
 				return argumentName;		
 		}
@@ -79,8 +81,7 @@ export class DocumentationHelper {
 			
 			// insert remarks snippet
 			if(isInsertRemarks){
-				EditorHelper.InsertNewLine(editor,editor.selection);
-				let remarksSnippetString = new vscode.SnippetString("### <remarks>\n### ${1:remarksText}\n### </remarks>");
+				let remarksSnippetString = new vscode.SnippetString("\n### <remarks>\n### ${1:remarksText}\n### </remarks>");
 				await editor.insertSnippet(remarksSnippetString,editor.selection.active);
 			}
 	
