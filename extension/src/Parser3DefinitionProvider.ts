@@ -3,58 +3,104 @@
 
 import * as vscode from 'vscode';
 //import { Config } from './Config';
-import { EditorHelper } from './EditorHelper';
+//import { EditorHelper } from './EditorHelper';
 
 class SymbolType {
 	public static MethodDeclaration : string = "MethodDeclaration";
 	public static MethodInvocation : string = "MethodInvocation";
 	public static Variable : string = "Variable";
+	public static ConstructorInvocation : string = "ConstructorInvocation";
+	public static MemberAccess : string = "MemberAccess";
+	public static StaticMethodInvocation : string = "StaticMethodInvocation";
+	public static MethodParameterDeclaration : string = "MethodParameterDeclaration";
 	public static Unknown : string = "UNKNOWN";
 }
 
 class Symbol{
 	Type: string;
 	Name : string;
+	ContainingString : string;
+	Document : vscode.TextDocument;
+	Position : vscode.Position;
 	
-	constructor(symbolType : string, symbolName : string){
+	constructor(symbolType : string, symbolName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
 		this.Type = symbolType;
 		this.Name = symbolName;
+		this.ContainingString = containingString;
+		this.Position = position;
+		this.Document = document;
 	}
 
-	public static Unknown(memberName : string):Symbol{
-		return new Symbol(SymbolType.Unknown, memberName);
+	public static Unknown(memberName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position):Symbol{
+		return new Symbol(SymbolType.Unknown, memberName, containingString, document, position);
 	}
 
-	public static Method(methodName : string, isInvocation : boolean){
+	public static Method(methodName : string, containingString : string, isInvocation : boolean, document : vscode.TextDocument, position : vscode.Position){
 		return isInvocation 
-			? new Symbol(SymbolType.MethodInvocation, methodName)
-			: new Symbol(SymbolType.MethodDeclaration, methodName);
+			? new Symbol(SymbolType.MethodInvocation, methodName, containingString, document, position)
+			: new Symbol(SymbolType.MethodDeclaration, methodName, containingString, document, position);
 	}
 
-	public static Variable(variableName : string){
-		return new Symbol(SymbolType.Variable,variableName);
+	public static Constructor(constructorMethodName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
+		return new Symbol(SymbolType.ConstructorInvocation, constructorMethodName, containingString, document, position);
+	}
+
+	public static Variable(variableName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
+		return new Symbol(SymbolType.Variable,variableName, containingString, document, position);
+	}
+
+	public static MemberAccess(memberName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
+		return new Symbol(SymbolType.MemberAccess, memberName, containingString, document, position);
+	}
+
+	public static StaticMethodInvocation(methodName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
+		return new Symbol(SymbolType.StaticMethodInvocation, methodName, containingString, document, position);
+	}
+
+	public static MethodParameterDeclaration(parameterName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
+		return new Symbol(SymbolType.MethodParameterDeclaration, parameterName, containingString, document, position);
 	}
 }
 
 export class Parser3DefinitionProvider implements vscode.DefinitionProvider {
 
-	private AnalyzeSelection(selectedMember : string) : Symbol{
-		let member = selectedMember.trim();
-		let memberName = member.substring(1);
+	private AnalyzeSelection(document: vscode.TextDocument, position: vscode.Position) : Symbol{
+		let currentString = document.lineAt(position.line).text.trim();
 
-		switch(member.substr(0,1)){
+		let wordRange = document.getWordRangeAtPosition(position);
+		if(wordRange === undefined){
+			throw new Error("No word range found.");	
+		}
+		let word = document.getText(wordRange);
+		let wordRangeWithLeadingSymbol = new vscode.Range(wordRange.start.translate(0,-1), wordRange.end);
+		let wordWithLeadingSymbol = document.getText(wordRangeWithLeadingSymbol);
+
+		switch(wordWithLeadingSymbol.substr(0,1)){
 			case "$":
-				return Symbol.Variable(memberName);
+				return Symbol.Variable(word, currentString, document, position);
 			case "^":
-				return Symbol.Method(memberName, true);
+				return Symbol.Method(word, currentString, true, document, position);
 			case "@":
-				return Symbol.Method(memberName, false);
+				return Symbol.Method(word, currentString, false, document, position);
+			case ":":
+				let wordRangeWithTwoLeadingSymbols = new vscode.Range(wordRange.start.translate(0,-2), wordRange.end);
+				let wordWithTwoLeadingSymbols = document.getText(wordRangeWithTwoLeadingSymbols);
+				if(wordWithTwoLeadingSymbols.startsWith("::")){
+					return Symbol.Constructor(word, currentString, document, position);
+				}else{
+					return Symbol.StaticMethodInvocation(word, currentString, document, position);
+				}
+			case ".":
+				return Symbol.MemberAccess(word, currentString, document, position);		
+			case "[":
+				return Symbol.MethodParameterDeclaration(word, currentString, document, position);
+			case " ":	
 			default:
-				return Symbol.Unknown(memberName);
+				return Symbol.Unknown(word, currentString, document, position);
 		}
 	}
 
-	public FindSymbol(symbol : Symbol, documentText : vscode.TextDocument) : vscode.Location{
+	public FindSymbol(symbol : Symbol, token: vscode.CancellationToken) : vscode.Location{
 		
 		//return new vscode.Location(document.uri,position); // No open text editor
 		throw new Error("NotImplemented");
@@ -70,13 +116,10 @@ export class Parser3DefinitionProvider implements vscode.DefinitionProvider {
 			vscode.window.showWarningMessage("Open a file first to go to definition.");
 			return Promise.reject("No open file editor.");
 		}
+				
+		let symbol = this.AnalyzeSelection(document, position);
 
-		let selection = new vscode.Selection(new vscode.Position(position.line,0),position);
-		let currentString = EditorHelper.GetCurrentString(editor, selection);
-		
-		let symbol = this.AnalyzeSelection(currentString);
-
-		return Promise.resolve(this.FindSymbol(symbol, document));
+		return Promise.resolve(this.FindSymbol(symbol, token));
     }
 }
 
