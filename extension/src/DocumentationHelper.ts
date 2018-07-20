@@ -5,7 +5,8 @@ import { Config } from './Config';
 import { EditorHelper } from './EditorHelper';
 
 export class DocumentationHelper {
-
+	
+	/*
 	private IsTitleCaseLetter(text : string, letterIndex : number) : boolean {
 		if(letterIndex > text.length - 1){
 			return false;
@@ -14,7 +15,6 @@ export class DocumentationHelper {
 		return letter.toLowerCase() !== letter;
 	}
 
-	/*
 	private AnalyzeArgumentType(argumentName : string) : string {
 		
 		if(argumentName.startsWith("is") && this.IsTitleCaseLetter(argumentName, 2)){
