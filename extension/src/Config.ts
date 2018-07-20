@@ -4,15 +4,19 @@ import { workspace } from 'vscode';
 
 export class Config {
 
-    public static get configuration() {
+    public static get Configuration() {
         return workspace.getConfiguration('parser3ext.settings');
     }
 
-    private static getSettings<T>(val: string): T {
-        return Config.configuration.get(val) as T;
+    private static GetSettings<T>(val: string): T {
+        return Config.Configuration.get(val) as T;
     }
 
     public static get IsForceCursorOnLineStart(): boolean {
-        return Config.getSettings<boolean>('forceCursorOnTheLineStart');
+        return Config.GetSettings<boolean>('forceCursorOnTheLineStart');
+	}
+
+	public static get AllowedEmptyLinesCount(): number {
+        return Config.GetSettings<number>('allowedEmptyLinesCount');
 	}
 }

@@ -71,6 +71,13 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Move the cursor on the line start upon InsertDocumentingHeaderInvocation. If set to false and invoked - the warning will be displayed and nothing happens."
+				},
+				"parser3ext.settings.allowedEmptyLinesCount": {
+					"type": "number",
+					"default": 3,
+					"minimum": 0,
+					"maximum": 65535,
+					"description": "Ammount of empty lines between method signature and documenting comment start."
 				}
 			}
 		}

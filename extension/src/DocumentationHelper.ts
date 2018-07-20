@@ -6,24 +6,36 @@ import { EditorHelper } from './EditorHelper';
 
 export class DocumentationHelper {
 
+	private IsTitleCaseLetter(text : string, letterIndex : number) : boolean {
+		if(letterIndex > text.length - 1){
+			return false;
+		}
+		let letter = text.substr(letterIndex, 1);
+		return letter.toLowerCase() !== letter;
+	}
+
 	private AnalyzeArgumentType(argumentName : string) : string {
-		if(argumentName.startsWith("is")){
+		
+		if(argumentName.startsWith("is") && this.IsTitleCaseLetter(argumentName, 2)){
 			return "Boolean";
 		}
-		switch(argumentName.substr(0,1)){
-			case "h":
-				return "Hash";
-			case "t":
-				return "Table";
-			case "b":
-				return "Boolean";
-			case "i":
-				return "Integer";
-			case "s":
-				return "String";
-			default :
-				return argumentName;		
+
+		if(this.IsTitleCaseLetter(argumentName, 1)){
+			switch(argumentName.substr(0,1)){
+				case "h":
+					return "Hash";
+				case "t":
+					return "Table";
+				case "b":
+					return "Boolean";
+				case "i":
+					return "Integer";
+				case "s":
+					return "String";
+			}	
 		}
+		
+		return argumentName;		
 	}
 	
 	public async InsertDocumentingComment(editor : vscode.TextEditor, isInsertRemarks:boolean=false):Promise<boolean>{
@@ -72,7 +84,10 @@ export class DocumentationHelper {
 				for(let i=0; i<methodArguments.length; i++){
 					let arg = methodArguments[i];
 					EditorHelper.InsertNewLine(editor,editor.selection);
-					let paramDescription = await EditorHelper.GetInputFromUser("Please provide description fo method argument "+arg, this.AnalyzeArgumentType(arg));
+					let paramDescription = await EditorHelper.GetInputFromUser(
+						"Please provide description for method argument "+arg, 
+						arg
+					);
 	
 					let paramSnippetString = new vscode.SnippetString("### <param name=\""+arg+"\">"+paramDescription+"</param>");	
 					await editor.insertSnippet(paramSnippetString,editor.selection.active);

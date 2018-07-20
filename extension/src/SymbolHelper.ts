@@ -17,16 +17,24 @@ export class SymbolType {
 export class Symbol{
 	Type: string;
 	Name : string;
+	ClearName : string;
 	ContainingString : string;
 	Document : vscode.TextDocument;
 	Position : vscode.Position;
+	HasSelfAccess : boolean;
 	
 	constructor(symbolType : string, symbolName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
 		this.Type = symbolType;
 		this.Name = symbolName;
 		this.ContainingString = containingString;
 		this.Position = position;
-		this.Document = document;
+		this.Document = document;		
+		this.HasSelfAccess = symbolName.startsWith("self.");
+		if(this.HasSelfAccess){
+			this.ClearName = this.Name.substr("self.".length);
+		}else{
+			this.ClearName = this.Name;
+		}
 	}
 
 	public static Unknown(memberName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position):Symbol{
@@ -68,9 +76,20 @@ export class SymbolHelper{
 		if(wordRange === undefined){
 			throw new Error("No word range found.");	
 		}
+
 		let word = document.getText(wordRange);
 		let wordRangeWithLeadingSymbol = new vscode.Range(wordRange.start.translate(0,-1), wordRange.end);
 		let wordWithLeadingSymbol = document.getText(wordRangeWithLeadingSymbol);
+
+		// analyze $self. of ^.self prefix
+		if(wordRange.start.character >= "^self.".length){
+			let potentialSelfAccessRange = new vscode.Range(wordRange.start.translate(0,-("^self.".length)), wordRange.end);
+			let potentialSelfAccess = document.getText(potentialSelfAccessRange);
+			if(potentialSelfAccess.indexOf("^self.") !== -1 || potentialSelfAccess.indexOf("@self.") !== -1){
+				word = potentialSelfAccess.substr(1);
+				wordWithLeadingSymbol = potentialSelfAccess;
+			}
+		}		
 
 		switch(wordWithLeadingSymbol.substr(0,1)){
 			case "$":
@@ -88,7 +107,7 @@ export class SymbolHelper{
 					return Symbol.StaticMethodInvocation(word, currentString, document, position);
 				}
 			case ".":
-				return Symbol.MemberAccess(word, currentString, document, position);		
+				return Symbol.MemberAccess(word, currentString, document, position);						
 			case "[":
 				return Symbol.MethodParameterDeclaration(word, currentString, document, position);
 			case " ":	

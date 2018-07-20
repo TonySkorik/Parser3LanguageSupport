@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import {Symbol, SymbolType, SymbolHelper} from './SymbolHelper';
 import { MarkdownBuilder } from './MarkdownBuilder';
+import { Config } from './Config';
 
 export class Parser3HoverProvider implements vscode.HoverProvider {
 
@@ -11,6 +12,8 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 		let charArray : string[]= [];
 		let i = indexOfMethodDecalaration;
 		let isFirstString = true; // to skip first newline character
+		let allowedEmptyStringsCount = Config.AllowedEmptyLinesCount;
+
 		while(true){
 			i = i-1;
 			if(i<0){
@@ -22,7 +25,13 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 					isFirstString = false;
 					continue;
 				}else{
-					let string = charArray.reverse().join("~~~").replace(/~~~/g,"");
+					let string = charArray.reverse().join("~~~").replace(/~~~/g,""); // to assemble string from the array of chars
+					if(string.trim() === "" && allowedEmptyStringsCount > 0){
+						// skip allowed ammount of empty lines
+						allowedEmptyStringsCount = allowedEmptyStringsCount-1;
+						charArray = [];
+						continue;
+					}
 					if(string.startsWith("###")){
 						stringArray.push(string.substr(3).trim());
 						charArray = [];
@@ -42,17 +51,17 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 
 		let documentText = symbol.Document.getText();
 
-		let indexOfMethodDecalaration = documentText.indexOf("@"+symbol.Name);
+		let indexOfMethodDecalaration = documentText.indexOf("@"+symbol.ClearName);
 
 		if(indexOfMethodDecalaration === -1){
-			ret.appendText("No method '"+symbol.Name+"' declaration found in current document.");
+			ret.appendText("No method '"+symbol.ClearName+"' declaration found in current document.");
 			return ret;
 		}
 		
 		let headerStrings = this.GetDocumentingHeaderStrings(documentText, indexOfMethodDecalaration);
 
 		if(headerStrings.length === 0){
-			ret.appendText("No method '"+symbol.Name+"' declaration found in current document.");
+			ret.appendText("No method '"+symbol.ClearName+"' declaration found in current document.");
 			return ret;
 		}else{
 			let mb = new MarkdownBuilder();
