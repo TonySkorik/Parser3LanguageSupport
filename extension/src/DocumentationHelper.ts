@@ -14,6 +14,7 @@ export class DocumentationHelper {
 		return letter.toLowerCase() !== letter;
 	}
 
+	/*
 	private AnalyzeArgumentType(argumentName : string) : string {
 		
 		if(argumentName.startsWith("is") && this.IsTitleCaseLetter(argumentName, 2)){
@@ -37,6 +38,7 @@ export class DocumentationHelper {
 		
 		return argumentName;		
 	}
+	*/
 	
 	public async InsertDocumentingComment(editor : vscode.TextEditor, isInsertRemarks:boolean=false):Promise<boolean>{
 		let selection = editor.selection;
@@ -84,6 +86,7 @@ export class DocumentationHelper {
 				for(let i=0; i<methodArguments.length; i++){
 					let arg = methodArguments[i];
 					EditorHelper.InsertNewLine(editor,editor.selection);
+					
 					let paramDescription = await EditorHelper.GetInputFromUser(
 						"Please provide description for method argument "+arg, 
 						arg
