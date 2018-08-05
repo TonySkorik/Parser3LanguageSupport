@@ -8,6 +8,8 @@ class BuilderMode {
 	public static Parameter : string = "<param";
 	public static Remarks : string = "<remarks>";
 	public static EndRemarks : string = "</remarks>";
+	public static Returns : string = "<returns>";
+	public static EndReturns : string = "</returns>";
 	public static Unknown : string = "unknown";
 	public static Resume : string = "resume";
 }
@@ -21,10 +23,16 @@ export class MarkdownBuilder{
 		if(currentString.startsWith(BuilderMode.Remarks)){
 			return BuilderMode.Remarks;
 		}
+		if(currentString.startsWith(BuilderMode.Returns)){
+			return BuilderMode.Returns;
+		}
+
 		if(currentString.startsWith(BuilderMode.Parameter)){
 			return BuilderMode.Parameter;
 		}
-		if(currentString.startsWith(BuilderMode.EndSummary) || currentString.startsWith(BuilderMode.EndRemarks)){
+		if(currentString.startsWith(BuilderMode.EndSummary) 
+			|| currentString.startsWith(BuilderMode.EndRemarks)
+			|| currentString.startsWith(BuilderMode.EndReturns)){
 			return BuilderMode.Unknown;
 		}
 		return BuilderMode.Resume;
@@ -42,6 +50,9 @@ export class MarkdownBuilder{
 		### <remarks>
 		### Test
 		### </remarks>
+		### <returns>
+		### Returns description
+		### </returns>
 		@case_submit[hData;hRet]
 		*/
 		let mode = BuilderMode.Unknown;
@@ -71,8 +82,11 @@ export class MarkdownBuilder{
 					let paramDescription = result[2];
 					ret.appendMarkdown("(**"+pramName+"**) : *"+paramDescription+"*;   ");
 					break;
+				case BuilderMode.Returns:
+					ret.appendMarkdown("**Returns** : "+currentString+ ";   ");
+					break;
 				case BuilderMode.Remarks:
-					ret.appendMarkdown("**Remarks** : "+currentString+";  ");
+					ret.appendMarkdown("**Remarks** : "+currentString+";   ");
 					break;
 			}			
 		}

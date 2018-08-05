@@ -4,6 +4,27 @@ import * as vscode from 'vscode';
 //import { Config } from './Config';
 
 export class EditorHelper{
+
+	public static async CommentSelection(editor : vscode.TextEditor){
+		var selection = editor.selection;
+		for(var line=selection.start.line; line <= selection.end.line; line++ ){
+			await editor.edit((eb)=>{
+				var currentLine = editor.document.lineAt(line);
+				eb.replace(currentLine.range, "#"+currentLine.text);
+			});	
+		}
+	}
+
+	public static async UncommentSelection(editor : vscode.TextEditor){
+		var selection = editor.selection;
+		for(var line=selection.start.line; line <= selection.end.line; line++ ){
+			await editor.edit((eb)=>{
+				var currentLine = editor.document.lineAt(line);
+				eb.replace(currentLine.range, currentLine.text.substr(1));
+			});	
+		}
+	}
+
 	public static GetCurrentString(editor : vscode.TextEditor, selection : vscode.Selection):string{
 		let lineSelection = selection.end.translate(0,10000);
 		return editor.document.getText(new vscode.Selection(selection.start, lineSelection)).trim();

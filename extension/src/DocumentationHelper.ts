@@ -5,41 +5,6 @@ import { Config } from './Config';
 import { EditorHelper } from './EditorHelper';
 
 export class DocumentationHelper {
-	
-	/*
-	private IsTitleCaseLetter(text : string, letterIndex : number) : boolean {
-		if(letterIndex > text.length - 1){
-			return false;
-		}
-		let letter = text.substr(letterIndex, 1);
-		return letter.toLowerCase() !== letter;
-	}
-
-	private AnalyzeArgumentType(argumentName : string) : string {
-		
-		if(argumentName.startsWith("is") && this.IsTitleCaseLetter(argumentName, 2)){
-			return "Boolean";
-		}
-
-		if(this.IsTitleCaseLetter(argumentName, 1)){
-			switch(argumentName.substr(0,1)){
-				case "h":
-					return "Hash";
-				case "t":
-					return "Table";
-				case "b":
-					return "Boolean";
-				case "i":
-					return "Integer";
-				case "s":
-					return "String";
-			}	
-		}
-		
-		return argumentName;		
-	}
-	*/
-	
 	public async InsertDocumentingComment(editor : vscode.TextEditor, isInsertRemarks:boolean=false):Promise<boolean>{
 		let selection = editor.selection;
 	
@@ -77,8 +42,8 @@ export class DocumentationHelper {
 			let methodArguments = EditorHelper.GetMethodArguments(possibleSignature);
 	
 			// insert main snippet
-			let methodSymmary = await EditorHelper.GetInputFromUser("Please provide method summary.","Method summary");
-			let mainSnippetString = new vscode.SnippetString("### <summary>\n### "+methodSymmary+"\n### </summary>");
+			let methodSummary = await EditorHelper.GetInputFromUser("Please provide method summary.","Method summary");
+			let mainSnippetString = new vscode.SnippetString("### <summary>\n### "+methodSummary+"\n### </summary>");
 			await editor.insertSnippet(mainSnippetString,computedSelection.start);
 	
 			//insert argument snippets
@@ -97,11 +62,16 @@ export class DocumentationHelper {
 				}
 			}
 			
+			// insert returns snippet
+			let returnsString = await EditorHelper.GetInputFromUser("Please provide method return description.","Method returns");
+			let returnsSnippetString = new vscode.SnippetString("\n### <returns>\n### "+returnsString+"\n### </returns>");
+			await editor.insertSnippet(returnsSnippetString,editor.selection.active);
+
 			// insert remarks snippet
 			if(isInsertRemarks){
 				let remarksSnippetString = new vscode.SnippetString("\n### <remarks>\n### ${1:remarksText}\n### </remarks>");
 				await editor.insertSnippet(remarksSnippetString,editor.selection.active);
-			}
+			}	
 	
 			return true;
 		}else{

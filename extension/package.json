@@ -2,7 +2,7 @@
 	"name": "parser3-language-support",
 	"displayName": "Parser3 Language Support",
 	"description": "Parser3 language support. Inspired by the extension by Valerii Iatsko (viatsko.parser3)",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"publisher": "tsoft",
 	"engines": {
 		"vscode": "^1.25.0"
@@ -56,12 +56,20 @@
 		],
 		"commands": [
 			{
-				"command": "extension.addDocumentingComment",
-				"title": "Add Documenting Comment"
+				"command": "parser3ext.addDocumentingComment",
+				"title": "Parser3: Add Documenting Comment"
 			},
 			{
-				"command": "extension.addDocumentingCommentWithRemarks",
-				"title": "Add Documenting Comment With Remarks"
+				"command": "parser3ext.addDocumentingCommentWithRemarks",
+				"title": "Parser3: Add Documenting Comment With Remarks"
+			},
+			{
+				"command": "parser3ext.commentSelection",
+				"title": "Parser3: Comment selection"
+			},
+			{
+				"command": "parser3ext.uncommentSelection",
+				"title": "Parser3: Uncomment selection"
 			}
 		],
 		"configuration": {

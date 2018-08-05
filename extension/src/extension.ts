@@ -3,6 +3,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { DocumentationHelper } from './DocumentationHelper';
+import { EditorHelper } from "./EditorHelper";
+import { EditorCommand } from "./EditorCommand";
 //import { Parser3DefinitionProvider } from './Parser3DefinitionProvider';
 import { Parser3HoverProvider } from './Parser3HoverProvider';
 
@@ -17,32 +19,28 @@ export function activate(context: vscode.ExtensionContext) {
     console.log('Parser3 Extended Language Support extension is now active!');
 
 	var documentationHelper = new DocumentationHelper();
-
-	let addDocumentingHeaderCommand = vscode.commands.registerCommand("extension.addDocumentingComment", ()=>{
-		let editor = vscode.window.activeTextEditor;
 		
-		if (!editor) {
-			vscode.window.showWarningMessage("Open a file first to insert comments.");
-			return; // No open text editor
-		}
-
-		documentationHelper.InsertDocumentingComment(editor);
+	let addDocumentingHeaderCommand = vscode.commands.registerCommand("parser3ext.addDocumentingComment", ()=>{
+		ExecuteIfEditorIsActive((ed)=>{documentationHelper.InsertDocumentingComment(ed);});
 	});
 
-	let addDocumentingHeaderWithRemarksCommand = vscode.commands.registerCommand("extension.addDocumentingCommentWithRemarks", ()=>{
-		let editor = vscode.window.activeTextEditor;
-		
-		if (!editor) {
-			vscode.window.showWarningMessage("Open a file first to insert comments.");
-			return; // No open text editor
-		}
+	let addDocumentingHeaderWithRemarksCommand = vscode.commands.registerCommand("parser3ext.addDocumentingCommentWithRemarks", ()=>{
+		ExecuteIfEditorIsActive((ed)=>{documentationHelper.InsertDocumentingComment(ed, true);});
+	});
 
-		documentationHelper.InsertDocumentingComment(editor, true);
+	let commentSelectionCommand = vscode.commands.registerCommand("parser3ext.commentSelection", ()=>{
+		ExecuteIfEditorIsActive((ed)=>{EditorHelper.CommentSelection(ed);});
+	});
+
+	let uncommentSelectionCommand = vscode.commands.registerCommand("parser3ext.uncommentSelection", ()=>{
+		ExecuteIfEditorIsActive((ed)=>{EditorHelper.UncommentSelection(ed);});
 	});
 
 	// commands
 	context.subscriptions.push(addDocumentingHeaderCommand);
 	context.subscriptions.push(addDocumentingHeaderWithRemarksCommand);
+	context.subscriptions.push(commentSelectionCommand);
+	context.subscriptions.push(uncommentSelectionCommand);
 
 	// definition provider
 	const P3_MODE: vscode.DocumentFilter = { language: 'parser3ext', scheme: '*' };
@@ -53,6 +51,17 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// hover provider
 	context.subscriptions.push(vscode.languages.registerHoverProvider(P3_MODE, new Parser3HoverProvider()));
+}
+
+function ExecuteIfEditorIsActive(commandToExecute:EditorCommand){
+	let editor = vscode.window.activeTextEditor;
+		
+	if (!editor) {
+		vscode.window.showWarningMessage("Open a file first to insert comments.");
+		return; // No open text editor
+	}
+
+	commandToExecute(editor);
 }
 
 // this method is called when your extension is deactivated
