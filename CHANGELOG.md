@@ -1,7 +1,22 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [0.0.6] - 05.08.2018
+- Added CHANGELOG.md
 
-## [Unreleased]
-- Initial release
+- Added <returns> comment
+
+- All commands now have "Paresr3:" prefix
+
+- Added (Un)Comment selection commands
+
+  - Parser3: Comment Selection
+  - Parser3: Uncomment Selection
+
+- Refactored command invocation
+
+  
+
+  
+  
+  
