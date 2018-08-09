@@ -40,7 +40,7 @@ Users appreciate release notes as you update your extension.
 - Started CHANGELOG.md
 - Started README.md
 - Added <returns> comment
-- All commands now have "Paresr3:" prefix
+- All commands now have "Parser3:" prefix
 - Added (Un)Comment selection commands
 
   - Parser3: Comment Selection
