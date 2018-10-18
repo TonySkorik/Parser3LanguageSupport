@@ -4,19 +4,25 @@ This extension adds Parser3 language support to VSCode.
 
 ## Features
 
-Syntax highlighting (mixed Parser3, HTML, SQL).
+-   Syntax highlighting (mixed Parser3, HTML, SQL).
 
-C# - style documenting header insertions.
+-   C# - style documenting header insertions.
 
-Documenting header parsing and hover provision.
+-   Documenting header parsing and hover provision.
 
-Comment / Uncomment selection commands.
+-   Comment / Uncomment selection commands.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+-   Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+
 
 ## Requirements
 
 VSCode 1.25.0 and higher.
+
+## Getting Started
+
+1.  Install the extension
+2.  Restart VS Code and open the folder containing the project you want to work on.
 
 ## Extension Settings
 
@@ -29,7 +35,7 @@ This extension contributes the following settings:
 
 None yet :)
 
-If you find one - feel free to submit an issue.
+If you find one - feel free to submit an issue or a pull request.
 
 ## Release Notes
 
@@ -40,7 +46,7 @@ Users appreciate release notes as you update your extension.
 - Started CHANGELOG.md
 - Started README.md
 - Added <returns> comment
-- All commands now have "Paresr3:" prefix
+- All commands now have "Parser3:" prefix
 - Added (Un)Comment selection commands
 
   - Parser3: Comment Selection
