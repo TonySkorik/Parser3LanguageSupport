@@ -2,8 +2,9 @@
 	"name": "parser3-language-support",
 	"displayName": "Parser3 Language Support",
 	"description": "Parser3 language support. Inspired by the extension by Valerii Iatsko (viatsko.parser3)",
-	"version": "0.0.6",
-	"publisher": "tsoft",
+	"version": "1.0.0",
+	"publisher": "Tony Skorik",
+	"icon": "images/icon.png",
 	"engines": {
 		"vscode": "^1.25.0"
 	},
@@ -19,9 +20,9 @@
 		"parser3 ext",
 		"Parser 3"
 	],
-	"preview": true,
+	"preview": false,
 	"galleryBanner": {
-		"color": "#41205f",
+		"color": "#228B22",
 		"theme": "dark"
 	},
 	"contributes": {
