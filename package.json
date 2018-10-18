@@ -3,7 +3,7 @@
 	"displayName": "Parser3 Language Support",
 	"description": "Parser3 language support. Inspired by the extension by Valerii Iatsko (viatsko.parser3)",
 	"version": "1.0.0",
-	"publisher": "Tony Skorik",
+	"publisher": "TonySkorik",
 	"icon": "images/icon.png",
 	"engines": {
 		"vscode": "^1.25.0"
