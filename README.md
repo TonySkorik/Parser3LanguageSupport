@@ -43,6 +43,6 @@ If you find one - feel free to submit an issue or a pull request.
 
 Users appreciate release notes as you update your extension.
 
-### 1.0.0
+### 1.0.1
 
 - First public release
