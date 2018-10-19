@@ -23,7 +23,7 @@
 	"preview": false,
 	"galleryBanner": {
 		"color": "#eff1f3",
-		"theme": "dark"
+		"theme": "light"
 	},
 	"contributes": {
 		"languages": [
