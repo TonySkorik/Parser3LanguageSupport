@@ -2,20 +2,19 @@
 
 ![logo](.\images\logo.png)
 
-This extension adds Parser3 language support to VSCode. 
+This extension adds Parser3 language support to VSCode.
 
 ## Features
 
--   Syntax highlighting (mixed Parser3, HTML, SQL).
+- Syntax highlighting (mixed Parser3, HTML, SQL).
 
--   C# - style documenting header insertions.
+- C# - style documenting header insertions.
 
--   Documenting header parsing and hover provision.
+- Documenting header parsing and hover provision.
 
--   Comment / Uncomment selection commands.
+- Comment / Uncomment selection commands.
 
--   Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
+- Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
 ## Requirements
 
@@ -23,8 +22,8 @@ VSCode 1.25.0 and higher.
 
 ## Getting Started
 
-1.  Install the extension
-2.  Restart VS Code and open the folder containing the project you want to work on.
+1. Install the extension
+2. Restart VS Code and open the folder containing the project you want to work on.
 
 ## Extension Settings
 
@@ -35,13 +34,15 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-None yet :)
+- `JOIN` SQL statement sometimes looses syntax highlighting
 
-If you find one - feel free to submit an issue or a pull request.
+If you find any bugs or whant to request a feature - feel free to submit an issue or a pull request.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 1.0.1
+
+- Updated packages
 
 ### 1.0.0
 
