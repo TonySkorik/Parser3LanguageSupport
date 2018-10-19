@@ -22,7 +22,7 @@
 	],
 	"preview": false,
 	"galleryBanner": {
-		"color": "#228B22",
+		"color": "#ffffff",
 		"theme": "dark"
 	},
 	"contributes": {
