@@ -43,14 +43,6 @@ If you find one - feel free to submit an issue or a pull request.
 
 Users appreciate release notes as you update your extension.
 
-### 0.0.6
+### 1.0.0
 
-- Started CHANGELOG.md
-- Started README.md
-- Added <returns> comment
-- All commands now have "Parser3:" prefix
-- Added (Un)Comment selection commands
-
-  - Parser3: Comment Selection
-  - Parser3: Uncomment Selection
-- Refactored command invocation
+- First public release
