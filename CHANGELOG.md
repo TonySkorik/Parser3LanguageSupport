@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.1.0] - 11.11.2018
+
+- Documenting header popup is now multi-lined.
+- Added command to go to method declaration in currently opened file.
+
 ## [1.0.1] - 19.10.2018
 - Updated packages
 

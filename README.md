@@ -40,6 +40,11 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### 1.1.0
+
+- Documenting header popup is now multi-lined.
+- Added command to go to method declaration in currently opened file.
+
 ### 1.0.1
 
 - Updated packages
