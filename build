@@ -2,3 +2,4 @@ npm cache clean --force
 del node_modules
 npm install
 vsce package
+vsce publish 1.1.1
