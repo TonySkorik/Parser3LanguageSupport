@@ -88,7 +88,8 @@ export class MarkdownBuilder{
 				case BuilderMode.Remarks:
 					ret.appendMarkdown("**Remarks** : "+currentString+";   ");
 					break;
-			}			
+			}		
+			ret.appendText("\n");
 		}
 
 		return ret;

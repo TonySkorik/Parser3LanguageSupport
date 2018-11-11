@@ -71,6 +71,10 @@
 			{
 				"command": "parser3ext.uncommentSelection",
 				"title": "Parser3: Uncomment selection"
+			},
+			{
+				"command": "parser3ext.goToMethodDeclaration",
+				"title": "Parser3: Go to specified method declaration"
 			}
 		],
 		"configuration": {

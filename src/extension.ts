@@ -7,6 +7,7 @@ import { EditorHelper } from "./EditorHelper";
 import { EditorCommand } from "./EditorCommand";
 //import { Parser3DefinitionProvider } from './Parser3DefinitionProvider';
 import { Parser3HoverProvider } from './Parser3HoverProvider';
+import { Parser3CodeNavigator } from './Parser3CodeNavigator';
 
 //==================================================================================================
 
@@ -18,7 +19,8 @@ export function activate(context: vscode.ExtensionContext) {
     // This line of code will only be executed once when your extension is activated
     console.log('Parser3 Extended Language Support extension is now active!');
 
-	var documentationHelper = new DocumentationHelper();
+	let documentationHelper = new DocumentationHelper();
+	let codeNavigator = new Parser3CodeNavigator();
 		
 	let addDocumentingHeaderCommand = vscode.commands.registerCommand("parser3ext.addDocumentingComment", ()=>{
 		ExecuteIfEditorIsActive((ed)=>{documentationHelper.InsertDocumentingComment(ed);});
@@ -36,11 +38,16 @@ export function activate(context: vscode.ExtensionContext) {
 		ExecuteIfEditorIsActive((ed)=>{EditorHelper.UncommentSelection(ed);});
 	});
 
+	let goToMethodCommand = vscode.commands.registerCommand("parser3ext.goToMethodDeclaration", ()=>{
+		ExecuteIfEditorIsActive((ed)=>{codeNavigator.GoToMethodDeclaration(ed);});
+	});
+
 	// commands
 	context.subscriptions.push(addDocumentingHeaderCommand);
 	context.subscriptions.push(addDocumentingHeaderWithRemarksCommand);
 	context.subscriptions.push(commentSelectionCommand);
 	context.subscriptions.push(uncommentSelectionCommand);
+	context.subscriptions.push(goToMethodCommand);
 
 	// definition provider
 	const P3_MODE: vscode.DocumentFilter = { language: 'parser3ext', scheme: '*' };

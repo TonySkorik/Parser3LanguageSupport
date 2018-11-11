@@ -2,7 +2,6 @@
 
 import * as vscode from 'vscode';
 
-
 export class SymbolType {
 	public static MethodDeclaration : string = "MethodDeclaration";
 	public static MethodInvocation : string = "MethodInvocation";
@@ -11,6 +10,8 @@ export class SymbolType {
 	public static MemberAccess : string = "MemberAccess";
 	public static StaticMethodInvocation : string = "StaticMethodInvocation";
 	public static MethodParameterDeclaration : string = "MethodParameterDeclaration";
+	public static Comment : string = "Comment";
+	public static Directive : string = "Directive";
 	public static Unknown : string = "UNKNOWN";
 }
 
@@ -66,19 +67,42 @@ export class Symbol{
 	public static MethodParameterDeclaration(parameterName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
 		return new Symbol(SymbolType.MethodParameterDeclaration, parameterName, containingString, document, position);
 	}
+
+	public static Comment(containingString : string, document : vscode.TextDocument, position : vscode.Position){
+		return new Symbol(SymbolType.Comment, "Comment", containingString, document, position);
+	}
+
+	public static Directive(directiveName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
+		return new Symbol(SymbolType.Directive, directiveName, containingString, document, position);
+	}
 }
 
 export class SymbolHelper{
 	public static AnalyzeSelection(document: vscode.TextDocument, position: vscode.Position) : Symbol{
 		let currentString = document.lineAt(position.line).text.trim();
 
+		if(currentString.charAt(0) === "#"){
+			return Symbol.Comment(currentString, document, position);
+		}
+
 		let wordRange = document.getWordRangeAtPosition(position);
 		if(wordRange === undefined){
-			throw new Error("No word range found.");	
+			if(position.character===0){
+				// means cursor is at the start of the string
+				wordRange = document.lineAt(position.line).range;
+			}else{
+				throw new Error("No word range found.");	
+			}
 		}
 
 		let word = document.getText(wordRange);
-		let wordRangeWithLeadingSymbol = new vscode.Range(wordRange.start.translate(0,-1), wordRange.end);
+		let wordRangeWithLeadingSymbol;
+		if(wordRange.start.character === 0){
+			wordRangeWithLeadingSymbol = wordRange;
+		}else{
+			wordRangeWithLeadingSymbol = new vscode.Range(wordRange.start.translate(0,-1), wordRange.end);
+		}
+		
 		let wordWithLeadingSymbol = document.getText(wordRangeWithLeadingSymbol);
 
 		// analyze $self. of ^.self prefix
@@ -97,7 +121,12 @@ export class SymbolHelper{
 			case "^":
 				return Symbol.Method(word, currentString, true, document, position);
 			case "@":
-				return Symbol.Method(word, currentString, false, document, position);
+				if(wordWithLeadingSymbol.indexOf("[") !== -1 
+					&& wordWithLeadingSymbol.indexOf("]") !== -1){
+					return Symbol.Method(word, currentString, false, document, position);
+				}else{
+					return Symbol.Directive(word, currentString, document, position);
+				}
 			case ":":
 				let wordRangeWithTwoLeadingSymbols = new vscode.Range(wordRange.start.translate(0,-2), wordRange.end);
 				let wordWithTwoLeadingSymbols = document.getText(wordRangeWithTwoLeadingSymbols);
@@ -114,5 +143,18 @@ export class SymbolHelper{
 			default:
 				return Symbol.Unknown(word, currentString, document, position);
 		}
+	}
+
+	public static GetMethodDeclarations(document: vscode.TextDocument) : Symbol[]{
+		let ret = new Array<Symbol>();
+
+		for(let i= 0 ; i<document.lineCount; i++){
+			let line = document.lineAt(i);
+			let symbol = this.AnalyzeSelection(document, line.range.start);
+			if(symbol.Type === SymbolType.MethodDeclaration){
+				ret.push(symbol);
+			}
+		}
+		return ret;
 	}
 }
