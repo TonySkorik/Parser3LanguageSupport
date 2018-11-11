@@ -1,6 +1,6 @@
 # Parser 3 Language Support extension
 
-![logo](.\images\logo.png)
+![](.\images\logo.png)
 
 This extension adds Parser3 language support to VSCode.
 
