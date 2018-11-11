@@ -19,4 +19,8 @@ export class Config {
 	public static get AllowedEmptyLinesCount(): number {
         return Config.GetSettings<number>('allowedEmptyLinesCount');
 	}
+
+	public static get IsDisableGoToMethodListSorting(): boolean{
+		return Config.GetSettings<boolean>('deisableGoToMethodListSorting');
+	}
 }

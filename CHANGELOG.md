@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.1.1] - 12.11.2018
+
+- Method decalrations are now lexicographically sorted (it is possible to switch sorting off in settings).
+- Added end of file option in GoToMethod command.
+
 ## [1.1.0] - 11.11.2018
 
 - Documenting header popup is now multi-lined.

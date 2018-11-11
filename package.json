@@ -2,7 +2,7 @@
 	"name": "parser3-language-support",
 	"displayName": "Parser3 Language Support",
 	"description": "Parser3 language support extension",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"publisher": "TonySkorik",
 	"icon": "images/icon.png",
 	"engines": {
@@ -84,6 +84,11 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Move the cursor on the line start upon InsertDocumentingHeader invocation. If set to false and invoked - the warning will be displayed and nothing happens."
+				},
+				"parser3ext.settings.deisableGoToMethodListSorting": {
+					"type": "boolean",
+					"default": false,
+					"description": "Disable method signature lexicographic sorting when showing GoToMethod picker."
 				},
 				"parser3ext.settings.allowedEmptyLinesCount": {
 					"type": "number",

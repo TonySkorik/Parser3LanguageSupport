@@ -14,7 +14,7 @@ This extension adds Parser3 language support to VSCode.
 
 - Comment / Uncomment selection commands.
 
-- Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- Go to specified method declaration within one file.
 
 ## Requirements
 
@@ -31,6 +31,7 @@ This extension contributes the following settings:
 
 * `parser3ext.settings.forceCursorOnTheLineStart`: Move the cursor on the line start upon InsertDocumentingHeader invocation. If set to `false` and invoked - the warning will be displayed and nothing happens.
 * `parser3ext.settings.allowedEmptyLinesCount`: Amount of empty lines between method signature and documenting comment start. If exceeded documenting header won't be parsed into hover.
+* `parser3ext.settings.deisableGoToMethodListSorting`: Set to `true` to diasable method signatures sorting in GoToMethod picker.
 
 ## Known Issues
 
@@ -39,6 +40,11 @@ This extension contributes the following settings:
 If you find any bugs or whant to request a feature - feel free to submit an issue or a pull request.
 
 ## Release Notes
+
+### 1.1.1
+
+- Method decalrations are now lexicographically sorted (it is possible to switch sorting off in settings).
+- Added end of file option in GoToMethod command.
 
 ### 1.1.0
 
