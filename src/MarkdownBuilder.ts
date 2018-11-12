@@ -59,7 +59,7 @@ export class MarkdownBuilder{
 
 		for(let i = 0 ; i<strings.length ; i++){
 			let currentString = strings[i].trim();		
-
+			
 			let newMode = this.GetMode(currentString);
 			if(newMode !== BuilderMode.Resume){
 				mode = newMode;
@@ -71,6 +71,8 @@ export class MarkdownBuilder{
 			switch(mode){
 				case BuilderMode.Summary:
 					ret.appendMarkdown("**Summary** : "+currentString +";   ");
+					ret.appendText("\n");
+					ret.appendMarkdown("___");
 					break;
 				case BuilderMode.Parameter:
 					let paramRegex = /param name="([^"]+)">([^<]*)/;
@@ -80,9 +82,11 @@ export class MarkdownBuilder{
 					}
 					let pramName =  result[1];
 					let paramDescription = result[2];
-					ret.appendMarkdown("(**"+pramName+"**) : *"+paramDescription+"*;   ");
+					ret.appendMarkdown("— **"+pramName+"** : "+paramDescription+";   ");
 					break;
 				case BuilderMode.Returns:
+					ret.appendMarkdown("___");
+					ret.appendText("\n");
 					ret.appendMarkdown("**Returns** : "+currentString+ ";   ");
 					break;
 				case BuilderMode.Remarks:

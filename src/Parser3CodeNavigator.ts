@@ -22,7 +22,7 @@ export class Parser3CodeNavigator {
 			if(!Config.IsDisableGoToMethodListSorting){
 				symbolNames.sort();
 			}
-			
+						
 			symbolNames.push(EndOfFileMarker);
 
 			let selection = await vscode.window.showQuickPick(symbolNames, {canPickMany : false, placeHolder : "Method signature"});
@@ -37,7 +37,7 @@ export class Parser3CodeNavigator {
 			}
 
 			let symbol = symbolsByName.get(selection);
-			if(symbol ===undefined){
+			if(symbol === undefined){
 				return;				
 			}	
 

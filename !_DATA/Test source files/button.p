@@ -51,7 +51,15 @@ partial
 		WHERE t > 1
 		GRANT EXECUTE ON [dbo].[test] TO TestRole
 	}
+	^create_button[]
 #===================================================================================================CREATE BUTTON
+### <summary>
+### Method summary
+### </summary>
+### <param name="hData">hData</param>
+### <returns>
+### Method returns
+### </returns>
 @create_button[hData]
 	^switch[$hData.type]{
 		^case[submit]{^case_submit[$hData]}
