@@ -75,9 +75,21 @@ export class Symbol{
 	public static Directive(directiveName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
 		return new Symbol(SymbolType.Directive, directiveName, containingString, document, position);
 	}
+
+	public GetNormalizedName() : string {
+		let ret = this.Name.toLowerCase();
+		if(ret.charAt(0) === "_"){
+			ret = ret.substr(1);
+		}
+		return ret;
+	}
 }
 
 export class SymbolHelper{
+
+	public static readonly AutoMethodDeclaration = "@auto[]";
+	public static readonly PostprocessMethodDeclaration = "@postprocess[]";
+
 	public static AnalyzeSelection(document: vscode.TextDocument, position: vscode.Position) : Symbol{
 		let currentString = document.lineAt(position.line).text.trim();
 
@@ -156,5 +168,13 @@ export class SymbolHelper{
 			}
 		}
 		return ret;
+	}
+
+	public static IsPostprocessMethod(symbol : Symbol) : boolean{
+		return symbol.Name.startsWith(this.PostprocessMethodDeclaration);
+	}
+
+	public static IsAutoMethod(symbol : Symbol) : boolean{
+		return symbol.Name.startsWith(this.AutoMethodDeclaration);
 	}
 }
