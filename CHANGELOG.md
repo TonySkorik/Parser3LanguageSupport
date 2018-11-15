@@ -5,6 +5,8 @@ All notable changes to the "parser3-extended-language-support" extension will be
 
 - In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively
 - Updated packages
+- Documenting header popup now has parameters separated from other sections
+- Reformated documenting header popup
 
 ## [1.1.1] - 12.11.2018
 

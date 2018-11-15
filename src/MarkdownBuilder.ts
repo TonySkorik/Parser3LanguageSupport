@@ -70,7 +70,7 @@ export class MarkdownBuilder{
 
 			switch(mode){
 				case BuilderMode.Summary:
-					ret.appendMarkdown("**Summary** : "+currentString +";   ");
+					ret.appendMarkdown("**Summary** : "+currentString);
 					ret.appendText("\n");
 					ret.appendMarkdown("___");
 					break;
@@ -82,15 +82,15 @@ export class MarkdownBuilder{
 					}
 					let pramName =  result[1];
 					let paramDescription = result[2];
-					ret.appendMarkdown("— **"+pramName+"** : "+paramDescription+";   ");
+					ret.appendMarkdown("— **"+pramName+"** : "+paramDescription);
 					break;
 				case BuilderMode.Returns:
 					ret.appendMarkdown("___");
 					ret.appendText("\n");
-					ret.appendMarkdown("**Returns** : "+currentString+ ";   ");
+					ret.appendMarkdown("**Returns** : "+currentString);
 					break;
 				case BuilderMode.Remarks:
-					ret.appendMarkdown("**Remarks** : "+currentString+";   ");
+					ret.appendMarkdown("**Remarks** : "+currentString);
 					break;
 			}		
 			ret.appendText("\n");

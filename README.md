@@ -44,6 +44,8 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 ### 1.1.2
 
 - In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively
+- Documenting header popup now has parameters separated from other sections
+- Reformated documenting header popup
 
 ### 1.1.1
 
