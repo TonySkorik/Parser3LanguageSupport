@@ -41,6 +41,10 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### 1.1.2
+
+- In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively
+
 ### 1.1.1
 
 - Method decalrations are now lexicographically sorted (it is possible to switch sorting off in settings).

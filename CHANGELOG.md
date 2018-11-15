@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.1.2] - 15.11.2018
+
+- In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively
+- Updated packages
+
 ## [1.1.1] - 12.11.2018
 
 - Method decalrations are now lexicographically sorted (it is possible to switch sorting off in settings).
