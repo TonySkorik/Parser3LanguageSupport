@@ -75,10 +75,10 @@ export class Symbol{
 	public static Directive(directiveName : string, containingString : string, document : vscode.TextDocument, position : vscode.Position){
 		return new Symbol(SymbolType.Directive, directiveName, containingString, document, position);
 	}
-
+	
 	public GetNormalizedName() : string {
-		let ret = this.Name.toLowerCase();
-		if(ret.charAt(0) === "_"){
+		let ret = this.ClearName.substr("@".length).toLowerCase();
+		while(ret.charAt(0) === "_"){
 			ret = ret.substr(1);
 		}
 		return ret;

@@ -18,15 +18,38 @@ class CodeNavigationListBuilder{
 
 	public constructor(symbols : Symbol[]){
 		let nav : NavigationListElement[] = new Array<NavigationListElement>();
-		let autoMethod : Symbol | undefined;
-		let postprocessMethod : Symbol | undefined;
+		let autoMethod : NavigationListElement | undefined;
+		let postprocessMethod : NavigationListElement | undefined;
 
 		symbols.forEach(v=>{
 			let isAutoOrPostprocess = false;
-			nav.push({NormalizedName : v.GetNormalizedName(), Name : v.Name, Symbol : v});
+			var element = {NormalizedName : v.GetNormalizedName(), Name : v.Name, Symbol : v};
+			if(SymbolHelper.IsAutoMethod(v)){
+				autoMethod = element;
+				isAutoOrPostprocess = true;
+			}
+			if(SymbolHelper.IsPostprocessMethod(v)){
+				postprocessMethod = element;
+				isAutoOrPostprocess = true;
+			}
+
+			if(!isAutoOrPostprocess){
+				nav.push(element);
+			}
 		});		
 		
-		nav.sort(this.Compare);
+		if(!Config.IsDisableGoToMethodListSorting){
+			nav.sort(this.Compare);
+		}	
+
+		if(autoMethod){
+			nav.reverse().push(autoMethod);
+			nav.reverse();
+		}
+
+		if(postprocessMethod){
+			nav.push(postprocessMethod);
+		}
 
 		this._navigationList = nav;
 	}
@@ -71,55 +94,9 @@ export class Parser3CodeNavigator {
 			return;
 		}
 
-		let symbolsByName = new Map<string, Symbol>();
-		let symbolNamesByNormalizedNames = new Map<string, string>();
-		let symbolNames = new Array<string>();
-		let symbolNormalizedNames = new Array<string>();
-		
-		let autoMethod : Symbol | undefined;
-		let postprocessMethod : Symbol | undefined;
+		let listBuilder = new CodeNavigationListBuilder(methodDeclarations);
 
-		methodDeclarations.forEach(s=>{
-			let isAutoOrPostprocess = false;
-			if(SymbolHelper.IsAutoMethod(s)){
-				autoMethod = s;
-				isAutoOrPostprocess = true;
-			}
-
-			if(SymbolHelper.IsPostprocessMethod(s)){
-				postprocessMethod = s;
-				isAutoOrPostprocess = true;
-			}
-			
-			if(!isAutoOrPostprocess){
-				let symbolName = s.Name;
-				let symbolNormalizedName = s.GetNormalizedName();
-				symbolsByName.set(symbolName, s);
-				symbolNormalizedNames.push(symbolNormalizedName);
-				symbolNamesByNormalizedNames.set(symbolNormalizedName, symbolName);
-			}
-		});	
-			
-		if(!Config.IsDisableGoToMethodListSorting){
-			symbolNormalizedNames.sort();
-		}
-				
-		if(autoMethod){
-			symbolNames.push(autoMethod.Name);
-		}
-
-		for(let normalizedName in symbolNormalizedNames){
-			let symbolName = symbolNamesByNormalizedNames.get(normalizedName);
-			if(symbolName === undefined ){
-				continue;
-			}
-			symbolNames.push(symbolName);
-		}
-		
-		if(postprocessMethod){
-			symbolNames.push(postprocessMethod.Name);
-		}
-
+		let symbolNames = listBuilder.GetNavigationList();
 		symbolNames.push(EndOfFileMarker);
 
 		let selection = await vscode.window.showQuickPick(symbolNames, {canPickMany : false, placeHolder : "Method signature"});
@@ -133,7 +110,7 @@ export class Parser3CodeNavigator {
 			editor.selection = new vscode.Selection(endLine.range.start, endLine.range.start);	
 		}
 
-		let symbol = symbolsByName.get(selection);
+		let symbol = listBuilder.GetSybolByName(selection);
 		if(symbol === undefined){
 			return;				
 		}	

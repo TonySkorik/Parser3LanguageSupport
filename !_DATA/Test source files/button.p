@@ -6,6 +6,15 @@ xcontrols
 static
 partial
 
+### <summary>
+### Pstprocess method
+### </summary>
+### <param name=""></param>
+### <returns>
+### nothing
+### </returns>
+@postprocess[]
+	this is postprocess method
 
 #===================================================================================================CREATE BUTTON
 @xcreate_button[hData]
@@ -61,6 +70,32 @@ partial
 ### Method returns
 ### </returns>
 @create_button[hData]
+	^switch[$hData.type]{
+		^case[submit]{^case_submit[$hData]}
+		^case[DEFAULT]{^case_button[$hData]}
+	}
+
+### <summary>
+### Method summary
+### </summary>
+### <param name="hData">hData</param>
+### <returns>
+### Method returns
+### </returns>
+@__create_button[hData]
+	^switch[$hData.type]{
+		^case[submit]{^case_submit[$hData]}
+		^case[DEFAULT]{^case_button[$hData]}
+	}
+
+### <summary>
+### Auto method
+### </summary>
+### <param name="hData">hData</param>
+### <returns>
+### Method returns
+### </returns>
+@auto[hData]
 	^switch[$hData.type]{
 		^case[submit]{^case_submit[$hData]}
 		^case[DEFAULT]{^case_button[$hData]}
