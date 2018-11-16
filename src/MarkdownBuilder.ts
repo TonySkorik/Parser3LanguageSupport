@@ -1,6 +1,7 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import { DocumentingHeader } from './Parser3HoverProvider';
 
 class BuilderMode {
 	public static Summary : string = "<summary>";
@@ -15,6 +16,10 @@ class BuilderMode {
 }
 
 export class MarkdownBuilder{
+
+	public BuildMarkdownForHeader(header: DocumentingHeader):vscode.MarkdownString{
+		throw new Error("not implemented!");
+	}
 
 	private GetMode(currentString : string): string{
 		if(currentString.startsWith(BuilderMode.Summary)){

@@ -5,11 +5,18 @@ import {Symbol, SymbolType, SymbolHelper} from './SymbolHelper';
 import { MarkdownBuilder } from './MarkdownBuilder';
 import { Config } from './Config';
 
+export class DocumentingHeader{
+	Summary : string | undefined;
+	ParemterDescriptions : Map<string,string> | undefined;
+	Returns : string | undefined;
+	Remarks : string | undefined;
+}
+
 export class Parser3HoverProvider implements vscode.HoverProvider {
 
 	private GetDocumentingHeaderStrings(documentText : string, indexOfMethodDecalaration : number) : string[]{
 		let stringArray : string[] = [];
-		let charArray : string[]= [];
+		let charArray : string[] = [];
 		let i = indexOfMethodDecalaration;
 		let isFirstString = true; // to skip first newline character
 		let allowedEmptyStringsCount = Config.AllowedEmptyLinesCount;
@@ -44,6 +51,25 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 			}
 		}
 		return stringArray.reverse();
+	}
+
+	private GetDocumentingHeader(documentText : string, indexOfMethodDecalaration : number) : DocumentingHeader{
+		let headerStrings = this.GetDocumentingHeaderStrings(documentText, indexOfMethodDecalaration);
+		let headerXml : string = "";
+
+		headerStrings.forEach(string => {
+			headerXml += string;
+		});
+
+		var xmldoc = require("xmldoc");
+		var document = new xmldoc.XmlDocument(headerXml);
+
+		var ret = new DocumentingHeader();
+
+		// build header
+		
+
+		return ret;
 	}
 
 	private GetDocumentationFromDocumentingHeader(symbol : Symbol) : vscode.MarkdownString{
