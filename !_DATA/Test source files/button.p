@@ -64,8 +64,9 @@ partial
 #===================================================================================================CREATE BUTTON
 ### <summary>
 ### Method summary
+### Method summary continues
 ### </summary>
-### <param name="hData">hData</param>
+### <param name="hData">hData parameter</param>
 ### <returns>
 ### Method returns
 ### </returns>

@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import {Symbol, SymbolType, SymbolHelper} from './SymbolHelper';
 import { MarkdownBuilder } from './MarkdownBuilder';
 import { Config } from './Config';
+import * as xdoc from "xmldoc";
 
 export class DocumentingHeader{
 	Summary : string | undefined;
@@ -55,20 +56,56 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 
 	private GetDocumentingHeader(documentText : string, indexOfMethodDecalaration : number) : DocumentingHeader{
 		let headerStrings = this.GetDocumentingHeaderStrings(documentText, indexOfMethodDecalaration);
-		let headerXml : string = "";
+		let headerXml : string = "<header>";
 
 		headerStrings.forEach(string => {
 			headerXml += string;
 		});
+		
+		headerXml+="</header>";
 
-		var xmldoc = require("xmldoc");
-		var document = new xmldoc.XmlDocument(headerXml);
-
+		var doc = new xdoc.XmlDocument(headerXml);
 		var ret = new DocumentingHeader();
 
+		/*
+		### <summary>
+		### Method summary
+		### </summary>
+		### <param name="hData">Hash</param>
+		### <param name="hRet">Hash</param>
+		### <remarks>
+		### Test
+		### </remarks>
+		### <returns>
+		### Returns description
+		### </returns>
+		@case_submit[hData;hRet]
+		*/
 		// build header
-		
+		let summary = doc.childNamed("summary");
+		let remarks = doc.childNamed("remarks");
+		let returns = doc.childNamed("returns");
+		let parameters = doc.childrenNamed("param");
 
+		if(summary){
+			ret.Summary = summary.val;
+		}
+		if(remarks){
+			ret.Remarks = remarks.val;
+		}
+		if(returns){
+			ret.Returns = returns.val;
+		}
+		if(parameters && parameters.length !== 0){
+			let paramMap = new Map<string,string>();
+			parameters.forEach(param=>{
+				let variableName = param.attr["name"];
+				let variableDescription = param.val;
+				paramMap.set(variableName, variableDescription);
+			});
+
+			ret.ParemterDescriptions = paramMap;
+		}
 		return ret;
 	}
 
@@ -84,6 +121,8 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 			return ret;
 		}
 		
+		let header = this.GetDocumentingHeader(documentText, indexOfMethodDecalaration);
+
 		let headerStrings = this.GetDocumentingHeaderStrings(documentText, indexOfMethodDecalaration);
 
 		if(headerStrings.length === 0){
