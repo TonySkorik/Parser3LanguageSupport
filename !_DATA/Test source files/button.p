@@ -67,6 +67,8 @@ partial
 ### Method summary continues
 ### </summary>
 ### <param name="hData">hData parameter</param>
+### <param name="hData2">hData parameter2</param>
+### <remarks>Test remarks</remarks>
 ### <returns>
 ### Method returns
 ### </returns>

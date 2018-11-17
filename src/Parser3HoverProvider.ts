@@ -5,10 +5,12 @@ import {Symbol, SymbolType, SymbolHelper} from './SymbolHelper';
 import { MarkdownBuilder } from './MarkdownBuilder';
 import { Config } from './Config';
 import * as xdoc from "xmldoc";
+import { KeyValuePair } from './Core';
+import { stringify } from 'querystring';
 
 export class DocumentingHeader{
 	Summary : string | undefined;
-	ParemterDescriptions : Map<string,string> | undefined;
+	ParemterDescriptions : Array<KeyValuePair<string,string>> | undefined;
 	Returns : string | undefined;
 	Remarks : string | undefined;
 }
@@ -54,20 +56,23 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 		return stringArray.reverse();
 	}
 
-	private GetDocumentingHeader(documentText : string, indexOfMethodDecalaration : number) : DocumentingHeader{
+	private GetDocumentingHeader(documentText : string, indexOfMethodDecalaration : number) : DocumentingHeader | undefined{
 		let headerStrings = this.GetDocumentingHeaderStrings(documentText, indexOfMethodDecalaration);
-		let headerXml : string = "<header>";
+		if(headerStrings.length === 0){
+			return undefined;
+		}
+		let headerXml : string = "<header>"; // xml should have root element
 
 		headerStrings.forEach(string => {
 			headerXml += string;
 		});
 		
-		headerXml+="</header>";
+		headerXml+="</header>"; // close root element
 
 		var doc = new xdoc.XmlDocument(headerXml);
 		var ret = new DocumentingHeader();
 
-		/*
+		/* header example
 		### <summary>
 		### Method summary
 		### </summary>
@@ -81,7 +86,7 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 		### </returns>
 		@case_submit[hData;hRet]
 		*/
-		// build header
+		
 		let summary = doc.childNamed("summary");
 		let remarks = doc.childNamed("remarks");
 		let returns = doc.childNamed("returns");
@@ -97,14 +102,15 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 			ret.Returns = returns.val;
 		}
 		if(parameters && parameters.length !== 0){
-			let paramMap = new Map<string,string>();
+			ret.ParemterDescriptions = new Array<KeyValuePair<string,string>>();
+
 			parameters.forEach(param=>{
 				let variableName = param.attr["name"];
 				let variableDescription = param.val;
-				paramMap.set(variableName, variableDescription);
+				if(ret.ParemterDescriptions){
+					ret.ParemterDescriptions.push(new KeyValuePair<string,string>(variableName, variableDescription));
+				}
 			});
-
-			ret.ParemterDescriptions = paramMap;
 		}
 		return ret;
 	}
@@ -122,16 +128,13 @@ export class Parser3HoverProvider implements vscode.HoverProvider {
 		}
 		
 		let header = this.GetDocumentingHeader(documentText, indexOfMethodDecalaration);
-
-		let headerStrings = this.GetDocumentingHeaderStrings(documentText, indexOfMethodDecalaration);
-
-		if(headerStrings.length === 0){
+		if(!header){
 			ret.appendText("No method '"+symbol.ClearName+"' declaration found in current document.");
 			return ret;
-		}else{
-			let mb = new MarkdownBuilder();
-			ret = mb.BuildMarkdown(headerStrings);
 		}
+
+		let mb = new MarkdownBuilder();
+		ret = mb.BuildMarkdown(header);	
 
 		return ret;
 	}

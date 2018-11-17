@@ -3,101 +3,44 @@
 import * as vscode from 'vscode';
 import { DocumentingHeader } from './Parser3HoverProvider';
 
-class BuilderMode {
-	public static Summary : string = "<summary>";
-	public static EndSummary : string = "</summary>";
-	public static Parameter : string = "<param";
-	public static Remarks : string = "<remarks>";
-	public static EndRemarks : string = "</remarks>";
-	public static Returns : string = "<returns>";
-	public static EndReturns : string = "</returns>";
-	public static Unknown : string = "unknown";
-	public static Resume : string = "resume";
-}
-
 export class MarkdownBuilder{
 
-	public BuildMarkdownForHeader(header: DocumentingHeader):vscode.MarkdownString{
-		throw new Error("not implemented!");
-	}
-
-	private GetMode(currentString : string): string{
-		if(currentString.startsWith(BuilderMode.Summary)){
-			return BuilderMode.Summary;
-		}
-		if(currentString.startsWith(BuilderMode.Remarks)){
-			return BuilderMode.Remarks;
-		}
-		if(currentString.startsWith(BuilderMode.Returns)){
-			return BuilderMode.Returns;
-		}
-
-		if(currentString.startsWith(BuilderMode.Parameter)){
-			return BuilderMode.Parameter;
-		}
-		if(currentString.startsWith(BuilderMode.EndSummary) 
-			|| currentString.startsWith(BuilderMode.EndRemarks)
-			|| currentString.startsWith(BuilderMode.EndReturns)){
-			return BuilderMode.Unknown;
-		}
-		return BuilderMode.Resume;
-	}	
-
-	public BuildMarkdown(strings : string[]):vscode.MarkdownString{
+	public BuildMarkdown(header: DocumentingHeader):vscode.MarkdownString{
 		let ret = new vscode.MarkdownString();
-		
-		/*
-		### <summary>
-		### Method summary
-		### </summary>
-		### <param name="hData">Hash</param>
-		### <param name="hRet">Hash</param>
-		### <remarks>
-		### Test
-		### </remarks>
-		### <returns>
-		### Returns description
-		### </returns>
-		@case_submit[hData;hRet]
-		*/
-		let mode = BuilderMode.Unknown;
 
-		for(let i = 0 ; i<strings.length ; i++){
-			let currentString = strings[i].trim();		
-			
-			let newMode = this.GetMode(currentString);
-			if(newMode !== BuilderMode.Resume){
-				mode = newMode;
-				if(mode !== BuilderMode.Parameter){
-					continue;
-				}
-			}
+		/* header example
+		<summary>Method summary</summary>
+		<param name="hData">Hash</param>
+		<param name="hRet">Hash</param>
+		<remarks>Test</remarks>
+		<returns>Returns description</returns>
+		*/		
 
-			switch(mode){
-				case BuilderMode.Summary:
-					ret.appendMarkdown("**Summary** : "+currentString);
-					ret.appendText("\n");
-					ret.appendMarkdown("___");
-					break;
-				case BuilderMode.Parameter:
-					let paramRegex = /param name="([^"]+)">([^<]*)/;
-					let result = paramRegex.exec(currentString);
-					if(result === null){
-						continue;
-					}
-					let pramName =  result[1];
-					let paramDescription = result[2];
-					ret.appendMarkdown("— **"+pramName+"** : "+paramDescription);
-					break;
-				case BuilderMode.Returns:
-					ret.appendMarkdown("___");
-					ret.appendText("\n");
-					ret.appendMarkdown("**Returns** : "+currentString);
-					break;
-				case BuilderMode.Remarks:
-					ret.appendMarkdown("**Remarks** : "+currentString);
-					break;
-			}		
+		if(header.Summary){
+			ret.appendMarkdown("**Summary** : "+header.Summary);
+			ret.appendText("\n");
+			ret.appendMarkdown("___");
+			ret.appendText("\n");
+		}
+		if(header.ParemterDescriptions && header.ParemterDescriptions.length !== 0){
+			header.ParemterDescriptions.forEach(kv=>{
+				ret.appendMarkdown("— **"+kv.Key+"** : "+kv.Value);
+				ret.appendText("\n");
+				ret.appendText("\n");
+			});
+		}
+		if(header.Remarks){
+			ret.appendText("\n");
+			ret.appendMarkdown("___");
+			ret.appendText("\n");
+			ret.appendMarkdown("**Remarks** : "+header.Remarks);
+			ret.appendText("\n");
+		}
+		if(header.Returns){
+			ret.appendText("\n");
+			ret.appendMarkdown("___");
+			ret.appendText("\n");
+			ret.appendMarkdown("**Returns** : "+header.Returns);
 			ret.appendText("\n");
 		}
 
