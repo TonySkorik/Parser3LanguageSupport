@@ -7,6 +7,9 @@ export class EditorHelper{
 
 	public static async CommentSelection(editor : vscode.TextEditor){
 		var selection = editor.selection;
+		if(selection.end.character===0){
+			selection = new vscode.Selection(selection.start, selection.end.translate(-1));
+		}
 		for(var line=selection.start.line; line <= selection.end.line; line++ ){
 			await editor.edit((eb)=>{
 				var currentLine = editor.document.lineAt(line);
@@ -20,7 +23,9 @@ export class EditorHelper{
 		for(var line=selection.start.line; line <= selection.end.line; line++ ){
 			await editor.edit((eb)=>{
 				var currentLine = editor.document.lineAt(line);
-				eb.replace(currentLine.range, currentLine.text.substr(1));
+				if(currentLine.text.startsWith("#")){
+					eb.replace(currentLine.range, currentLine.text.substr(1));
+				}
 			});	
 		}
 	}

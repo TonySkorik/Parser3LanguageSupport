@@ -41,6 +41,13 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### 1.1.3 - 18.11.2018
+
+- Changed xmldoc building logic
+- Fixed GoToMethod sorting logic
+- GoToMethod sorting logic now puts `unhandled_exceprton` method at the end of the list
+- CommentSelection now does not comment the last selection line if cursor stands at its beginning
+
 ### 1.1.2
 
 - In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively

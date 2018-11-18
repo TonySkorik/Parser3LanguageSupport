@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.1.3] - 18.11.2018
+
+- Changed xmldoc building logic
+- Fixed GoToMethod sorting logic
+- GoToMethod sorting logic now puts `unhandled_exceprton` method at the end of the list
+- CommentSelection now does not comment the last selection line if cursor stands at its beginning
+
 ## [1.1.2] - 15.11.2018
 
 - In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively

@@ -6,7 +6,6 @@ import { MarkdownBuilder } from './MarkdownBuilder';
 import { Config } from './Config';
 import * as xdoc from "xmldoc";
 import { KeyValuePair } from './Core';
-import { stringify } from 'querystring';
 
 export class DocumentingHeader{
 	Summary : string | undefined;

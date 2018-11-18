@@ -89,6 +89,7 @@ export class SymbolHelper{
 
 	public static readonly AutoMethodDeclaration = "@auto[]";
 	public static readonly PostprocessMethodDeclaration = "@postprocess[]";
+	public static readonly UnhandledExceptionMethodDeclaration = "@unhandled_exception[]";
 
 	public static AnalyzeSelection(document: vscode.TextDocument, position: vscode.Position) : Symbol{
 		let currentString = document.lineAt(position.line).text.trim();
@@ -176,5 +177,9 @@ export class SymbolHelper{
 
 	public static IsAutoMethod(symbol : Symbol) : boolean{
 		return symbol.Name.startsWith(this.AutoMethodDeclaration);
+	}
+
+	public static IsUnhandledExceptionMethod(symbol : Symbol) : boolean{
+		return symbol.Name.startsWith(this.UnhandledExceptionMethodDeclaration);
 	}
 }

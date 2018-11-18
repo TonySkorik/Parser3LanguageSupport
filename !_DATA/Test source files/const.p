@@ -219,6 +219,8 @@ $result[^hash_strict::create[
 	$.info[]
 ][readonly]]
 
+@unhandled_exception[]
+test
 
 @GET_ACCESSDENIED[]
 $result[^hash_strict::create[
