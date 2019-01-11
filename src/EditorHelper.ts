@@ -1,25 +1,30 @@
 'use strict';
 
 import * as vscode from 'vscode';
-//import { Config } from './Config';
+import { Config } from './Config';
 
 export class EditorHelper{
 
 	public static async CommentSelection(editor : vscode.TextEditor){
 		var selection = editor.selection;
-		if(selection.end.character===0){
+		if(selection.end.character===0 
+			&& selection.start.line !== selection.end.line){
 			selection = new vscode.Selection(selection.start, selection.end.translate(-1));
 		}
 		for(var line=selection.start.line; line <= selection.end.line; line++ ){
-			await editor.edit((eb)=>{
+			await editor.edit((ed)=>{
 				var currentLine = editor.document.lineAt(line);
-				eb.replace(currentLine.range, "#"+currentLine.text);
+				ed.replace(currentLine.range, "#"+Config.CommentSymbolSuffix+currentLine.text);
 			});	
 		}
 	}
 
 	public static async RemSelection(editor : vscode.TextEditor){
-		//TODO
+		var selection = editor.selection;		
+		editor.edit((ed)=>{
+			ed.insert(selection.start, "^rem{" + Config.CommentSymbolSuffix);
+			ed.insert(selection.end, Config.CommentSymbolSuffix + "}");
+		});	
 	}
 
 	public static async UncommentSelection(editor : vscode.TextEditor){
@@ -28,14 +33,35 @@ export class EditorHelper{
 			await editor.edit((eb)=>{
 				var currentLine = editor.document.lineAt(line);
 				if(currentLine.text.startsWith("#")){
-					eb.replace(currentLine.range, currentLine.text.substr(1));
+					eb.replace(currentLine.range, currentLine.text.substr(1+Config.CommentSymbolSuffix.length));
 				}
 			});	
 		}
 	}
 
 	public static async CommentAwareTabShift(editor : vscode.TextEditor){
-		//TODO
+		var selection = editor.selection;
+		if(selection.start.line === selection.end.line && selection.start.character !== 0){
+			await editor.edit((ed)=>{
+				if(selection.start.character === selection.end.character){
+					ed.insert(selection.start, "\t");
+				}else{
+					ed.replace(selection, "\t");
+					editor.selection = new vscode.Selection(selection.end, selection.end);
+				}
+			});	
+			return;
+		}
+		for(var line=selection.start.line; line <= selection.end.line; line++ ){
+			await editor.edit((ed)=>{
+				var currentLine = editor.document.lineAt(line);
+				if(currentLine.text.startsWith("#")){
+					ed.insert(currentLine.range.start.translate(0,1), "\t");
+				}else{
+					ed.insert(currentLine.range.start, "\t");
+				}
+			});	
+		}
 	}
 
 	public static GetCurrentString(editor : vscode.TextEditor, selection : vscode.Selection):string{

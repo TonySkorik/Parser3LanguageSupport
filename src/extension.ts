@@ -70,11 +70,11 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(vscode.languages.registerHoverProvider(P3_MODE, new Parser3HoverProvider()));
 }
 
-function ExecuteIfEditorIsActive(commandToExecute:EditorCommand){
+function ExecuteIfEditorIsActive(commandToExecute:EditorCommand) {
 	let editor = vscode.window.activeTextEditor;
 		
 	if (!editor) {
-		vscode.window.showWarningMessage("Open a file first to insert comments.");
+		vscode.window.showWarningMessage("Open a file first to utilize this extension.");
 		return; // No open text editor
 	}
 

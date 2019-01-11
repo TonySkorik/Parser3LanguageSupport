@@ -2,7 +2,7 @@
 	"name": "parser3-language-support",
 	"displayName": "Parser3 Language Support",
 	"description": "Parser3 language support extension",
-	"version": "1.1.3",
+	"version": "1.1.4",
 	"publisher": "TonySkorik",
 	"icon": "images/icon.png",
 	"engines": {
@@ -65,7 +65,7 @@
 		"commands": [
 			{
 				"command": "parser3ext.commentAwareTabShift",
-				"title": "Parser3: Comment-aware tab shift"
+				"title": "Parser3: Performs comment-aware tab shift which does not move comment `#` symbols"
 			},
 			{
 				"command": "parser3ext.addDocumentingComment",
@@ -95,12 +95,19 @@
 		"configuration": {
 			"title": "Parser3 Language Support Config",
 			"properties": {
+				"parser3ext.settings.commentSymbolSuffix": {
+					"type": [
+						"string"
+					],
+					"default": "",
+					"description": "Sets the symbol which should be printed after comment '#' symbol upon 'parser3ext.commentSelection' command invocation"
+				},
 				"parser3ext.settings.forceCursorOnTheLineStart": {
 					"type": "boolean",
 					"default": true,
 					"description": "Move the cursor on the line start upon InsertDocumentingHeader invocation. If set to false and invoked - the warning will be displayed and nothing happens."
 				},
-				"parser3ext.settings.deisableGoToMethodListSorting": {
+				"parser3ext.settings.disableGoToMethodListSorting": {
 					"type": "boolean",
 					"default": false,
 					"description": "Disable method signature lexicographic sorting when showing GoToMethod picker."

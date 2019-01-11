@@ -21,6 +21,10 @@ export class Config {
 	}
 
 	public static get IsDisableGoToMethodListSorting(): boolean{
-		return Config.GetSettings<boolean>('deisableGoToMethodListSorting');
+		return Config.GetSettings<boolean>('disableGoToMethodListSorting');
+	}
+
+	public static get CommentSymbolSuffix(): string {
+		return Config.GetSettings<string>('commentSymbolSuffix');
 	}
 }

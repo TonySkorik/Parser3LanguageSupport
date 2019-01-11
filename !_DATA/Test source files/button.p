@@ -42,11 +42,11 @@ partial
 @case_submit[hData;hRet]
 	<script>
 		^$(function() {
-    			^$( "#${hData.id}" ).button()^;
-  
- 		})^;
-  	</script>
-	<td></td>
+   			^$( "#${hData.id}" ).button()^;
+ 
+		})^;
+	</script>
+#	<td></td>
 	<td>
 		<input type="submit" id="$hData.id" value="$hData.value" 
 
