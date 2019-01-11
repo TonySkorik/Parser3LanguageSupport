@@ -44,7 +44,7 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
-### 1.1.4
+### 1.1.5
 
 - Added command to wrap selection in `^rem{}`
 - TAB is now comment-aware. I.e. if the line starts with the comment symbol `#` it will be left at the begginning of the line and TAB chacracter will be inserted after it.

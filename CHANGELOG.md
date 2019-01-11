@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
-## [1.1.4] - 11.01.2019
+## [1.1.5] - 11.01.2019
 
 - Added command to wrap selection in `^rem{}`
 - TAB is now comment-aware. I.e. if the line starts with the comment symbol `#` it will be left at the begginning of the line and TAB chacracter will be inserted after it.
