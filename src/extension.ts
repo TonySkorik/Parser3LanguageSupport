@@ -34,6 +34,10 @@ export function activate(context: vscode.ExtensionContext) {
 		ExecuteIfEditorIsActive((ed)=>{EditorHelper.CommentSelection(ed);});
 	});
 
+	let remSelectionCommand = vscode.commands.registerCommand("parser3ext.remSelection", ()=>{
+		ExecuteIfEditorIsActive((ed)=>{EditorHelper.RemSelection(ed);});
+	});
+
 	let uncommentSelectionCommand = vscode.commands.registerCommand("parser3ext.uncommentSelection", ()=>{
 		ExecuteIfEditorIsActive((ed)=>{EditorHelper.UncommentSelection(ed);});
 	});
@@ -42,12 +46,18 @@ export function activate(context: vscode.ExtensionContext) {
 		ExecuteIfEditorIsActive((ed)=>{codeNavigator.GoToMethodDeclaration(ed);});
 	});
 
+	let commentAwareTabShiftCommand = vscode.commands.registerCommand("parser3ext.commentAwareTabShift", ()=>{
+		ExecuteIfEditorIsActive((ed)=>{EditorHelper.CommentAwareTabShift(ed);});
+	});
+
 	// commands
 	context.subscriptions.push(addDocumentingHeaderCommand);
 	context.subscriptions.push(addDocumentingHeaderWithRemarksCommand);
 	context.subscriptions.push(commentSelectionCommand);
+	context.subscriptions.push(remSelectionCommand);
 	context.subscriptions.push(uncommentSelectionCommand);
 	context.subscriptions.push(goToMethodCommand);
+	context.subscriptions.push(commentAwareTabShiftCommand);
 
 	// definition provider
 	const P3_MODE: vscode.DocumentFilter = { language: 'parser3ext', scheme: '*' };

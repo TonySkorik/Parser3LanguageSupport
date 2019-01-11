@@ -55,7 +55,18 @@
 				"path": "./snippets/snippets.json"
 			}
 		],
+		"keybindings": [
+			{
+				"command": "parser3ext.commentAwareTabShift",
+				"key": "Tab",
+				"when": "editorTextFocus && editorLangId == parser3ext"
+			}
+		],
 		"commands": [
+			{
+				"command": "parser3ext.commentAwareTabShift",
+				"title": "Parser3: Comment-aware tab shift"
+			},
 			{
 				"command": "parser3ext.addDocumentingComment",
 				"title": "Parser3: Add Documenting Comment"
@@ -63,6 +74,10 @@
 			{
 				"command": "parser3ext.addDocumentingCommentWithRemarks",
 				"title": "Parser3: Add Documenting Comment With Remarks"
+			},
+			{
+				"command": "parser3ext.remSelection",
+				"title": "Parser3: Rem selection"
 			},
 			{
 				"command": "parser3ext.commentSelection",
@@ -114,9 +129,9 @@
 	"devDependencies": {
 		"@types/mocha": "^2.2.42",
 		"@types/node": "^7.10.2",
-		"tslint": "^5.11.0",
-		"typescript": "^3.1.6",
-		"vscode": "^1.1.21"
+		"tslint": "^5.12.1",
+		"typescript": "^3.2.2",
+		"vscode": "^1.1.26"
 	},
 	"license": "MIT",
 	"repository": {

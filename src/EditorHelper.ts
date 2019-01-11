@@ -18,6 +18,10 @@ export class EditorHelper{
 		}
 	}
 
+	public static async RemSelection(editor : vscode.TextEditor){
+		//TODO
+	}
+
 	public static async UncommentSelection(editor : vscode.TextEditor){
 		var selection = editor.selection;
 		for(var line=selection.start.line; line <= selection.end.line; line++ ){
@@ -28,6 +32,10 @@ export class EditorHelper{
 				}
 			});	
 		}
+	}
+
+	public static async CommentAwareTabShift(editor : vscode.TextEditor){
+		//TODO
 	}
 
 	public static GetCurrentString(editor : vscode.TextEditor, selection : vscode.Selection):string{
