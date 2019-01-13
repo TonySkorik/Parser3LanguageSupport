@@ -44,6 +44,11 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### 1.1.6
+
+- Added setting `allowCommentAwareTabCommentsShift` to allow comment-awatre TAB to shift commented strings. Default is `false`.
+- Last string of selection now does not get shifted if it has no symbols selected.
+
 ### 1.1.5
 
 - Added command to wrap selection in `^rem{}`

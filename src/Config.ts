@@ -16,6 +16,10 @@ export class Config {
         return Config.GetSettings<boolean>('forceCursorOnTheLineStart');
 	}
 
+	public static get IsAllowCommentAwareTabCommentsShift(): boolean {
+        return Config.GetSettings<boolean>('allowCommentAwareTabCommentsShift');
+	}
+
 	public static get AllowedEmptyLinesCount(): number {
         return Config.GetSettings<number>('allowedEmptyLinesCount');
 	}

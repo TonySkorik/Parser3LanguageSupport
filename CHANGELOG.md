@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.1.6] - 13.01.2019
+
+- Added setting `allowCommentAwareTabCommentsShift` to allow comment-awatre TAB to shift commented strings. Default is `false`.
+- Last string of selection now does not get shifted if it has no symbols selected.
+
 ## [1.1.5] - 11.01.2019
 
 - Added command to wrap selection in `^rem{}`
