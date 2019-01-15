@@ -44,6 +44,11 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### [1.1.7] - 15.01.2019
+
+- Fixed error when comment-aware TAB did not work if the cursor was in first position of an empty line.
+- Content-aware TAB now ignores last selection line if it has no symbols selected (cursor is at the beginning of a line).
+
 ### 1.1.6
 
 - Added setting `allowCommentAwareTabCommentsShift` to allow comment-awatre TAB to shift commented strings. Default is `false`.

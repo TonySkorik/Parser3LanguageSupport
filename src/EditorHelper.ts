@@ -42,7 +42,7 @@ export class EditorHelper{
 	public static async CommentAwareTabShift(editor : vscode.TextEditor){
 		var selection = editor.selection;
 		// ordinary TAB behavior
-		if(selection.start.line === selection.end.line && selection.start.character !== 0){
+		if(selection.start.line === selection.end.line){
 			await editor.edit((ed)=>{
 				if(selection.start.character === selection.end.character){
 					ed.insert(selection.start, "\t");
@@ -56,7 +56,7 @@ export class EditorHelper{
 		for(var line=selection.start.line; line <= selection.end.line; line++ ){
 			await editor.edit((ed)=>{
 				var currentLine = editor.document.lineAt(line);
-				if(line === selection.end.line && currentLine.range.end.character===0){
+				if(line === selection.end.line && selection.end.character===0){
 					return;
 				}
 				if(currentLine.text.startsWith("#")){

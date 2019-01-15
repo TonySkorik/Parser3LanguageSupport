@@ -1,13 +1,13 @@
 #===================================================================================================INPUT xCONTROL MODULE
 @CLASS
 xcontrols
-
+	
 @OPTIONS
 static
 partial
 
-### <summary>
-### Pstprocess method
+###	<summary>
+### Postprocess method
 ### </summary>
 ### <param name=""></param>
 ### <returns>
@@ -15,13 +15,13 @@ partial
 ### </returns>
 @postprocess[]
 	this is postprocess method
-
+test
 #===================================================================================================CREATE BUTTON
 @xcreate_button[hData]
-	^switch[$hData.type]{
-		^case[submit]{^case_submit[$hData]}
-		^case[DEFAULT]{^case_button[$hData]}
-	}
+^switch[$hData.type]{
+	^case[submit]{^case_submit[$hData]}
+	^case[DEFAULT]{^case_button[$hData]}
+}
 
 #===================================================================================================BUILD SIMPLE BUTTON
 @case_button[hData]

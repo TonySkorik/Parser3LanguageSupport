@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.1.7] - 15.01.2019
+
+- Fixed error when comment-aware TAB did not work if the cursor was in first position of an empty line.
+- Content-aware TAB now ignores last selection line if it has no symbols selected (cursor is at the beginning of a line).
+
 ## [1.1.6] - 13.01.2019
 
 - Added setting `allowCommentAwareTabCommentsShift` to allow comment-awatre TAB to shift commented strings. Default is `false`.
