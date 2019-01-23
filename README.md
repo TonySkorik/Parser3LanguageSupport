@@ -44,6 +44,10 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### [1.1.8] - 23.01.2019
+
+- CommentSelection command now does not insert `parser3ext.settings.commentSymbolSuffix` if invoked for already commented line.
+
 ### [1.1.7] - 15.01.2019
 
 - Fixed error when comment-aware TAB did not work if the cursor was in first position of an empty line.
@@ -56,22 +60,22 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ### 1.1.5
 
-- Added command to wrap selection in `^rem{}`
+- Added command to wrap selection in `^rem{}`.
 - TAB is now comment-aware. I.e. if the line starts with the comment symbol `#` it will be left at the begginning of the line and TAB chacracter will be inserted after it.
 - Fixed #10 : wrong comment selection translation.
 
 ### 1.1.3
 
-- Changed xmldoc building logic
-- Fixed GoToMethod sorting logic
-- GoToMethod sorting logic now puts `unhandled_excepton` method at the end of the list
-- CommentSelection now does not comment the last selection line if cursor stands at its beginning
+- Changed xmldoc building logic.
+- Fixed GoToMethod sorting logic.
+- GoToMethod sorting logic now puts `unhandled_excepton` method at the end of the list.
+- CommentSelection now does not comment the last selection line if cursor stands at its beginning.
 
 ### 1.1.2
 
-- In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively
-- Documenting header popup now has parameters separated from other sections
-- Reformated documenting header popup
+- In addition to method sorting, added `auto` and `postprocess` methods to top and bottom of the list respectively.
+- Documenting header popup now has parameters separated from other sections.
+- Reformated documenting header popup.
 
 ### 1.1.1
 

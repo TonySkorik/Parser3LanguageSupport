@@ -14,7 +14,11 @@ export class EditorHelper{
 		for(var line=selection.start.line; line <= selection.end.line; line++ ){
 			await editor.edit((ed)=>{
 				var currentLine = editor.document.lineAt(line);
-				ed.replace(currentLine.range, "#"+Config.CommentSymbolSuffix+currentLine.text);
+				var commentSymbolSuffix = Config.CommentSymbolSuffix;
+				if(currentLine.text.startsWith("#")){
+					commentSymbolSuffix = "";
+				}
+				ed.replace(currentLine.range, "#"+commentSymbolSuffix+currentLine.text);
 			});	
 		}
 	}
