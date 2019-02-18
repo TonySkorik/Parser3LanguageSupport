@@ -12,7 +12,7 @@ This extension adds Parser3 language support to VSCode.
 
 - Documenting header parsing and hover provision.
 
-- Comment / Uncomment selection commands (both `#` and `^rem{}`).
+- Comment / Uncomment selection commands (both `#` and `^rem{}`) with configurable suffixes.
 
 - Go to specified method declaration within one file. Featuring special methods list sorting and some special labels such as file start and file end.
 
@@ -43,6 +43,11 @@ This extension contributes the following settings:
 If you find any bugs or whant to request a feature - feel free to submit an issue or a pull request.
 
 ## Release Notes
+
+### [1.1.9] - 17.02.2019
+
+- RemSelection command now inserts suffix after `^rem{`. Suffix can be configured in `parser3ext.settings.remCommentSuffix`.
+- GoToMethod now supports multiple methods with the same name.
 
 ### [1.1.8] - 23.01.2019
 

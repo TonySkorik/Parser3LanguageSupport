@@ -78,6 +78,10 @@ test
 		^case[DEFAULT]{^case_button[$hData]}
 	}
 
+
+@case_button[hData]
+antother case button method
+
 ### <summary>
 ### Method summary
 ### </summary>
@@ -103,3 +107,7 @@ test
 		^case[submit]{^case_submit[$hData]}
 		^case[DEFAULT]{^case_button[$hData]}
 	}
+
+
+@case_button[hData]
+antother case button method

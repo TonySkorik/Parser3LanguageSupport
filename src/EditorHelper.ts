@@ -26,8 +26,8 @@ export class EditorHelper{
 	public static async RemSelection(editor : vscode.TextEditor){
 		var selection = editor.selection;		
 		editor.edit((ed)=>{
-			ed.insert(selection.start, "^rem{" + Config.CommentSymbolSuffix);
-			ed.insert(selection.end, Config.CommentSymbolSuffix + "}");
+			ed.insert(selection.start, "^rem{" + Config.RemCommentSuffix);
+			ed.insert(selection.end, Config.RemCommentSuffix + "}");
 		});	
 	}
 

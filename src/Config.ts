@@ -31,4 +31,8 @@ export class Config {
 	public static get CommentSymbolSuffix(): string {
 		return Config.GetSettings<string>('commentSymbolSuffix');
 	}
+
+	public static get RemCommentSuffix(): string {
+		return Config.GetSettings<string>('remCommentSuffix');
+	}
 }

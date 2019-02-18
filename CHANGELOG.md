@@ -1,5 +1,10 @@
 # Change Log
+
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
+
+## [1.1.9] - 17.02.2019
+
+- RemSelection command now inserts suffix after `^rem{`. Suffix can be configured in `parser3ext.settings.remCommentSuffix`.
 
 ## [1.1.8] - 23.01.2019
 

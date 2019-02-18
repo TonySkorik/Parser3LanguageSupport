@@ -24,7 +24,7 @@ class CodeNavigationListBuilder{
 
 		symbols.forEach(v=>{
 			let isAutoOrPostprocessOrUnhandleException = false;
-			var element = {NormalizedName : v.GetNormalizedName(), Name : v.Name, Symbol : v};
+			let element = {NormalizedName : v.GetNormalizedName(), Name : v.Name, Symbol : v};
 			if(SymbolHelper.IsAutoMethod(v)){
 				autoMethod = element;
 				isAutoOrPostprocessOrUnhandleException = true;
@@ -39,6 +39,18 @@ class CodeNavigationListBuilder{
 			}
 			
 			if(!isAutoOrPostprocessOrUnhandleException){
+				let sameElements = nav.filter((elt)=>{
+					return elt.NormalizedName === element.NormalizedName;
+				}).sort(this.Compare);
+				if(sameElements.length>0){
+					let sameElementSuffix = sameElements[sameElements.length-1].Name.split(" #");
+					let sameElementIndex = 0;
+					if(sameElementSuffix.length > 1){
+						sameElementIndex = Number.parseInt(sameElementSuffix[1]);
+					}
+					sameElementIndex++;
+					element.Name = element.Name + " #" + sameElementIndex;
+				}
 				nav.push(element);
 			}
 		});		
