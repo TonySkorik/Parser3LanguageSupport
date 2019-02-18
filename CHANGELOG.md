@@ -5,6 +5,7 @@ All notable changes to the "parser3-extended-language-support" extension will be
 ## [1.1.9] - 17.02.2019
 
 - RemSelection command now inserts suffix after `^rem{`. Suffix can be configured in `parser3ext.settings.remCommentSuffix`.
+- GoToMethod now supports multiple methods with the same name.
 
 ## [1.1.8] - 23.01.2019
 
