@@ -44,6 +44,10 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### [1.1.10] - 05.05.2019
+
+- Updated packages
+
 ### [1.1.9] - 17.02.2019
 
 - RemSelection command now inserts suffix after `^rem{`. Suffix can be configured in `parser3ext.settings.remCommentSuffix`.
