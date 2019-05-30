@@ -44,20 +44,20 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
-### [1.1.10] - 05.05.2019
+### 1.2.0
 
-- Updated packages
+- Refactored comments and methods search logic
 
-### [1.1.9] - 17.02.2019
+### 1.1.9
 
 - RemSelection command now inserts suffix after `^rem{`. Suffix can be configured in `parser3ext.settings.remCommentSuffix`.
 - GoToMethod now supports multiple methods with the same name.
 
-### [1.1.8] - 23.01.2019
+### 1.1.8
 
 - CommentSelection command now does not insert `parser3ext.settings.commentSymbolSuffix` if invoked for already commented line.
 
-### [1.1.7] - 15.01.2019
+### 1.1.7
 
 - Fixed error when comment-aware TAB did not work if the cursor was in first position of an empty line.
 - Content-aware TAB now ignores last selection line if it has no symbols selected (cursor is at the beginning of a line).
