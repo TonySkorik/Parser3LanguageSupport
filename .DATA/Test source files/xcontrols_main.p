@@ -176,7 +176,7 @@ xfile
 # тогда какую первую функцию дернут та и загрузит xml
 
 #region Test region
-@static:test_static_function[]
+@static:test_static_function[wwsw;locals]
 	^sql{}
 #endregion		
 

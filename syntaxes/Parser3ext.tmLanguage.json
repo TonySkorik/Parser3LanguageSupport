@@ -57,6 +57,45 @@
 			"name": "entity.name.function.static.parser3ext"
 		},
 		{
+			"name": "meta.function.static.definition.parser3ext",
+			"begin": "^(@static:[\\w\\-]+)(\\[)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.static.definition.parser3ext"
+				},
+				"2": {
+					"name": "punctuation.section.string.parser3ext"
+				}
+			},
+			"end": "(\\])?(\\s.*)?$",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.section.string.parser3ext"
+				},
+				"2": {
+					"name": "comment.line.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#separator"
+				},
+				{
+					"match": "\\]\\[",
+					"name": "punctuation.section.string.parser3ext"
+				},
+				{
+					"match": "\\bresult\\b",
+					"name": "variable.parameter.result.parser3ext"
+				},
+				{
+					"match": "\\blocals\\b",
+					"name": "variable.parameter.locals.parser3ext"
+				}
+			]
+		},
+		{
+			"name": "meta.function.definition.parser3ext",
 			"begin": "^(@[\\w\\-]+)(\\[)",
 			"beginCaptures": {
 				"1": {
@@ -75,7 +114,6 @@
 					"name": "comment.line.parser3ext"
 				}
 			},
-			"name": "meta.function.definition.parser3ext",
 			"patterns": [
 				{
 					"include": "#separator"
@@ -140,7 +178,11 @@
 				},
 				{
 					"match": "(\\.|:)[\\w\\-]*",
-					"name": "entity.name.function.parser3ext"
+					"captures":{
+						"1":{
+							"name": "entity.name.function.parser3ext"
+						}
+					}
 				}
 			]
 		},
