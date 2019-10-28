@@ -178,6 +178,7 @@ xfile
 #region Test region
 @static:test_static_function[wwsw;locals]
 	^sql{}
+	^static:test_static_fuction[]
 #endregion		
 
 #=========================================================================LOG EVERY PROJECT USING THIS FRAMEWORK VERSION
