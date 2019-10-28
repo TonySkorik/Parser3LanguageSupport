@@ -39,14 +39,14 @@
 					".bp",
 					".pp"
 				],
-				"configuration": "./parser3ext.configuration.json"
+				"configuration": "./parser3ext.lang-configuration.json"
 			}
 		],
 		"grammars": [
 			{
 				"language": "parser3ext",
 				"scopeName": "source.parser3ext",
-				"path": "./syntaxes/Parser3ext.tmLanguage"
+				"path": "./syntaxes/Parser3ext.tmLanguage.json"
 			}
 		],
 		"snippets": [
@@ -147,10 +147,10 @@
 	},
 	"devDependencies": {
 		"@types/mocha": "^2.2.42",
-		"@types/node": "^7.10.6",
-		"tslint": "^5.16.0",
-		"typescript": "^3.4.5",
-		"vscode": "^1.1.33"
+		"@types/node": "^7.10.8",
+		"tslint": "^5.20.0",
+		"typescript": "^3.6.4",
+		"vscode": "^1.1.36"
 	},
 	"license": "MIT",
 	"repository": {

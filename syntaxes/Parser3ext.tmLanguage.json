@@ -1,0 +1,682 @@
+{
+	"fileTypes": [
+		"p"
+	],
+	"foldingStartMarker": "\\{\\s*$",
+	"foldingStopMarker": "^\\s*\\}",
+	"name": "Parser3ext",
+	"patterns": [
+		{
+			"match": "\\^(if|for|eval|process|while|s(witch|leep)|c(a(se|che)|on(nect|tinue))|t(aint|hrow|ry)|u(ntaint|se)|apply-taint|break)\\b",
+			"name": "keyword.operator.parser3ext"
+		},
+		{
+			"match": "\\^#[0-9a-fA-F]{2}",
+			"name": "constant.character.parser3ext"
+		},
+		{
+			"begin": "\\^rem\\{",
+			"end": "\\}",
+			"patterns": [
+				{
+					"include": "#rem-insider"
+				}
+			],
+			"name": "comment.block.parser3ext"
+		},
+		{
+			"match": "^#.*",
+			"name": "comment.line.parser3ext"
+		},
+		{
+			"match": "(\\^)(\\^|\\$|;|@|\\(|\\)|\\{|\\}|\\[|\\]|:|\"|'|#)",
+			"captures": {
+				"1": {
+					"name": "constant.character.escape.parser3ext"
+				}
+			}
+		},
+		{
+			"match": "\\^[\\w\\-]+::[\\w\\-]*\\b",
+			"name": "entity.name.function.constructor.parser3ext"
+		},
+		{
+			"match": "\\$result\\b(?![-_.:])",
+			"name": "variable.language.result.parser3ext"
+		},
+		{
+			"match": "(?<=\\[)DEFAULT(?=\\])",
+			"name": "variable.language.DEFAULT.parser3ext"
+		},
+		{
+			"match": "^@[\\w\\-]*$",
+			"name": "entity.name.function.parser3ext"
+		},
+		{
+			"match": "^@static:[\\w\\-]*$",
+			"name": "entity.name.function.static.parser3ext"
+		},
+		{
+			"begin": "^(@[\\w\\-]+)(\\[)",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.definition.parser3ext"
+				},
+				"2": {
+					"name": "punctuation.section.string.parser3ext"
+				}
+			},
+			"end": "(\\])?(\\s.*)?$",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.section.string.parser3ext"
+				},
+				"2": {
+					"name": "comment.line.parser3ext"
+				}
+			},
+			"name": "meta.function.definition.parser3ext",
+			"patterns": [
+				{
+					"include": "#separator"
+				},
+				{
+					"match": "\\]\\[",
+					"name": "punctuation.section.string.parser3ext"
+				},
+				{
+					"match": "\\bresult\\b",
+					"name": "variable.parameter.result.parser3ext"
+				},
+				{
+					"match": "\\blocals\\b",
+					"name": "variable.parameter.locals.parser3ext"
+				}
+			]
+		},
+		{
+			"name": "meta.function.definition.parser3ext",
+			"begin": "\\^[\\w\\-]*",
+			"end": "(\\b(?![.:])|\\s)",
+			"captures": {
+				"0": {
+					"name": "entity.name.function.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"begin": "(\\.|:)(\\[)",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.function.parser3ext"
+						},
+						"2": {
+							"name": "punctuation.section.string.parser3ext"
+						}
+					},
+					"end": "\\]",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.section.string.parser3ext"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					],
+					"name": "meta.parameters.parser3ext"
+				},
+				{
+					"match": "(\\.|:)(\\$[\\w\\-]*)",
+					"captures": {
+						"1": {
+							"name": "entity.name.function.parser3ext"
+						},
+						"2": {
+							"name": "variable.other.parser3ext"
+						}
+					}
+				},
+				{
+					"match": "(\\.|:)[\\w\\-]*",
+					"name": "entity.name.function.parser3ext"
+				}
+			]
+		},
+		{
+			"name": "meta.variable.definition.parser3ext",
+			"begin": "(\\$)(\\{)(\\w+)",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.other.parser3ext"
+				},
+				"2": {
+					"name": "punctuation.section.code.parser3ext"
+				},
+				"3": {
+					"name": "variable.other.parser3ext"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.code.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#variable-inline"
+				},
+				{
+					"include": "#variable-branch"
+				}
+			]
+		},
+		{
+			"name": "meta.variable.definition.parser3ext",
+			"begin": "\\$\\.?[\\w\\-]*",
+			"end": "(\\b(?![.:])|\\B(?![\\w\\-\\$])|\\s)",
+			"captures": {
+				"0": {
+					"name": "variable.other.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#variable-inline"
+				},
+				{
+					"include": "#variable-branch"
+				}
+			]
+		},
+		{
+			"begin": "\\(",
+			"end": "(\\)|\\n(?=^@))",
+			"captures": {
+				"0": {
+					"name": "punctuation.section.expression.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				},
+				{
+					"include": "#separator"
+				},
+				{
+					"include": "#quoted-string-single"
+				},
+				{
+					"include": "#quoted-string-double"
+				},
+				{
+					"match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)((e|E)(\\+|-)?[0-9]+)?))\\b",
+					"name": "constant.numeric.parser3ext"
+				},
+				{
+					"match": "\\b(true|false)\\b",
+					"name": "constant.language.parser3ext"
+				},
+				{
+					"match": "\\b(is|def|in|ne|eq|lt|gt|le|ge)\\b",
+					"name": "keyword.operator.parser3ext"
+				},
+				{
+					"match": "\\B(-f|-d)\\b",
+					"name": "keyword.operator.parser3ext"
+				},
+				{
+					"match": "[-!%&<>*+=/\\\\~|]",
+					"name": "keyword.operator.symbolic.parser3ext"
+				}
+			],
+			"name": "meta.expression.parser3ext"
+		},
+		{
+			"begin": "\\[",
+			"end": "\\]",
+			"captures": {
+				"0": {
+					"name": "punctuation.section.string.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				},
+				{
+					"include": "#separator"
+				}
+			],
+			"name": "meta.string.parser3ext"
+		},
+		{
+			"begin": "\\{",
+			"end": "\\}",
+			"captures": {
+				"0": {
+					"name": "punctuation.section.code.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				},
+				{
+					"include": "#separator"
+				}
+			],
+			"name": "meta.code.parser3ext"
+		},
+		{
+			"begin": "(<)([a-zA-Z0-9:]++)(?=[^>]*></\\2>)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.begin.html.parser3ext"
+				},
+				"2": {
+					"name": "entity.name.tag.html.parser3ext"
+				}
+			},
+			"end": "(>)(<)(/)(\\2)(>)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.end.html.parser3ext"
+				},
+				"2": {
+					"name": "punctuation.definition.tag.begin.html meta.scope.between-tag-pair.html.parser3ext"
+				},
+				"3": {
+					"name": "punctuation.definition.tag.begin.html.parser3ext"
+				},
+				"4": {
+					"name": "entity.name.tag.html.parser3ext"
+				},
+				"5": {
+					"name": "punctuation.definition.tag.end.html.parser3ext"
+				}
+			},
+			"name": "meta.tag.any.html.parser3ext",
+			"patterns": [
+				{
+					"include": "#tag-stuff"
+				}
+			]
+		},
+		{
+			"begin": "(<\\?)(xml)",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.tag.html.parser3ext"
+				},
+				"2": {
+					"name": "entity.name.tag.xml.html.parser3ext"
+				}
+			},
+			"end": "(\\?>)",
+			"name": "meta.tag.preprocessor.xml.html.parser3ext",
+			"patterns": [
+				{
+					"include": "#tag-generic-attribute"
+				}
+			]
+		},
+		{
+			"begin": "<!--",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.comment.html.parser3ext"
+				}
+			},
+			"end": "--\\s*>",
+			"name": "comment.block.html.parser3ext",
+			"patterns": [
+				{
+					"match": "--",
+					"name": "invalid.illegal.bad-comments-or-CDATA.html.parser3ext"
+				}
+			]
+		},
+		{
+			"begin": "<!",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.tag.html.parser3ext"
+				}
+			},
+			"end": ">",
+			"name": "meta.tag.sgml.html.parser3ext",
+			"patterns": [
+				{
+					"begin": "(?i:DOCTYPE)",
+					"captures": {
+						"1": {
+							"name": "entity.name.tag.doctype.html.parser3ext"
+						}
+					},
+					"end": "(?=>)",
+					"name": "meta.tag.sgml.doctype.html.parser3ext",
+					"patterns": [
+						{
+							"match": "\"[^\">]*\"",
+							"name": "string.quoted.double.doctype.identifiers-and-DTDs.html.parser3ext"
+						}
+					]
+				},
+				{
+					"begin": "\\[CDATA\\[",
+					"end": "]](?=>)",
+					"name": "constant.other.inline-data.html.parser3ext"
+				},
+				{
+					"match": "(\\s*)(?!--|>)\\S(\\s*)",
+					"name": "invalid.illegal.bad-comments-or-CDATA.html.parser3ext"
+				}
+			]
+		},
+		{
+			"begin": "(</?)((?i:body|head|html)\\b)",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.tag.begin.html.parser3ext"
+				},
+				"2": {
+					"name": "entity.name.tag.structure.any.html.parser3ext"
+				}
+			},
+			"end": "(>)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.end.html.parser3ext"
+				}
+			},
+			"name": "meta.tag.structure.any.html.parser3ext",
+			"patterns": [
+				{
+					"include": "#tag-stuff"
+				}
+			]
+		},
+		{
+			"begin": "(</?)((?i:address|blockquote|dd|div|dl|dt|fieldset|form|frame|frameset|h1|h2|h3|h4|h5|h6|iframe|noframes|object|ol|p|ul|applet|center|dir|hr|menu|pre)\\b)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.begin.html.parser3ext"
+				},
+				"2": {
+					"name": "entity.name.tag.block.any.html.parser3ext"
+				}
+			},
+			"end": "(>)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.end.html.parser3ext"
+				}
+			},
+			"name": "meta.tag.block.any.html.parser3ext",
+			"patterns": [
+				{
+					"include": "#tag-stuff"
+				}
+			]
+		},
+		{
+			"begin": "(</?)((?i:a|abbr|acronym|area|b|base|basefont|bdo|big|br|button|caption|cite|code|col|colgroup|del|dfn|em|font|head|html|i|img|input|ins|isindex|kbd|label|legend|li|link|map|meta|noscript|optgroup|option|param|q|s|samp|script|select|small|span|strike|strong|style|sub|sup|table|tbody|td|textarea|tfoot|th|thead|title|tr|tt|u|var)\\b)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.begin.html.parser3ext"
+				},
+				"2": {
+					"name": "entity.name.tag.inline.any.html.parser3ext"
+				}
+			},
+			"end": "((?: ?/)?>)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.end.html.parser3ext"
+				}
+			},
+			"name": "meta.tag.inline.any.html.parser3ext",
+			"patterns": [
+				{
+					"include": "#tag-stuff"
+				}
+			]
+		},
+		{
+			"begin": "(</?)([a-zA-Z0-9:]+)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.begin.html.parser3ext"
+				},
+				"2": {
+					"name": "entity.name.tag.other.html.parser3ext"
+				}
+			},
+			"end": "(>)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.end.html.parser3ext"
+				}
+			},
+			"name": "meta.tag.other.html.parser3ext",
+			"patterns": [
+				{
+					"include": "#tag-stuff"
+				}
+			]
+		},
+		{
+			"include": "#entities"
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "keyword.other.create.sql.parser3ext"
+				},
+				"2": {
+					"name": "keyword.other.sql.parser3ext"
+				},
+				"5": {
+					"name": "entity.name.function.sql.parser3ext"
+				}
+			},
+			"match": "(?i:^\\s*(create)\\s+(aggregate|conversion|database|domain|function|group|(unique\\s+)?index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)(['\"`]?)(\\w+)\\4",
+			"name": "meta.create.sql.parser3ext"
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "keyword.other.create.sql.parser3ext"
+				},
+				"2": {
+					"name": "keyword.other.sql.parser3ext"
+				}
+			},
+			"match": "(?i:^\\s*(drop)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view))",
+			"name": "meta.drop.sql.parser3ext"
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "keyword.other.create.sql.parser3ext"
+				},
+				"2": {
+					"name": "keyword.other.table.sql.parser3ext"
+				},
+				"3": {
+					"name": "entity.name.function.sql.parser3ext"
+				},
+				"4": {
+					"name": "keyword.other.cascade.sql.parser3ext"
+				}
+			},
+			"match": "(?i:\\s*(drop)\\s+(table)\\s+(\\w+)(\\s+cascade)?\\b)",
+			"name": "meta.drop.sql.parser3ext"
+		},
+		{
+			"captures": {
+				"1": {
+					"name": "keyword.other.create.sql.parser3ext"
+				},
+				"2": {
+					"name": "keyword.other.table.sql.parser3ext"
+				}
+			},
+			"match": "(?i:^\\s*(alter)\\s+(aggregate|conversion|database|domain|function|group|index|language|operator class|operator|rule|schema|sequence|table|tablespace|trigger|type|user|view)\\s+)",
+			"name": "meta.alter.sql.parser3ext"
+		},
+		{
+			"match": "(?i:\\b((?:primary|foreign)\\s+key|references|on\\sdelete(\\s+cascade)?|check|constraint)\\b)",
+			"name": "storage.modifier.sql.parser3ext"
+		},
+		{
+			"match": "(?i:\\b(select(\\s+distinct)?|insert\\s+(ignore\\s+)?into|update|delete|from|set|where|group\\sby|or|like|and|union(\\s+all)?|having|order\\sby|limit|(inner|cross)\\s+join|straight_join|(left|right)(\\s+outer)?\\s+join|natural(\\s+(left|right)(\\s+outer)?)?\\s+join)\\b)",
+			"name": "keyword.other.DML.sql.parser3ext"
+		},
+		{
+			"match": "(?i:\\b(on|((is\\s+)?not\\s+)?null)\\b)",
+			"name": "keyword.other.DDL.create.II.sql.parser3ext"
+		},
+		{
+			"match": "(?i:\\bvalues\\b)",
+			"name": "keyword.other.DML.II.sql.parser3ext"
+		},
+		{
+			"match": "(?i:\\b(begin(\\s+work)?|start\\s+transaction|commit(\\s+work)?|rollback(\\s+work)?)\\b)",
+			"name": "keyword.other.LUW.sql.parser3ext"
+		},
+		{
+			"match": "(?i:\\b(grant(\\swith\\sgrant\\soption)?|revoke)\\b)",
+			"name": "keyword.other.authorization.sql.parser3ext"
+		},
+		{
+			"match": "(?i:\\bin\\b)",
+			"name": "keyword.other.data-integrity.sql.parser3ext"
+		},
+		{
+			"match": "(?i:^\\s*(comment\\s+on\\s+(table|column|aggregate|constraint|database|domain|function|index|operator|rule|schema|sequence|trigger|type|view))\\s+.*?\\s+(is)\\s+)",
+			"name": "keyword.other.object-comments.sql.parser3ext"
+		},
+		{
+			"match": "(?i)\\bAS\\b",
+			"name": "keyword.other.alias.sql.parser3ext"
+		},
+		{
+			"match": "(?i)\\b(DESC|ASC)\\b",
+			"name": "keyword.other.order.sql.parser3ext"
+		},
+		{
+			"comment": "List of SQL99 built-in functions from http://www.oreilly.com/catalog/sqlnut/chapter/ch04.html",
+			"match": "(?i)\\b(CURRENT_(DATE|TIME(STAMP)?|USER)|(SESSION|SYSTEM)_USER)\\b",
+			"name": "support.function.scalar.sql.parser3ext"
+		},
+		{
+			"comment": "List of SQL99 built-in functions from http://www.oreilly.com/catalog/sqlnut/chapter/ch04.html",
+			"match": "(?i)\\b(AVG|COUNT|MIN|MAX|SUM)(?=\\s*\\()",
+			"name": "support.function.aggregate.sql.parser3ext"
+		},
+		{
+			"match": "(?i)\\b(CONCATENATE|CONVERT|LOWER|SUBSTRING|TRANSLATE|TRIM|UPPER)\\b",
+			"name": "support.function.string.sql.parser3ext"
+		}
+	],
+	"repository": {
+		"separator": {
+			"match": ";",
+			"name": "punctuation.separator.parser3ext"
+		},
+		"rem-insider": {
+			"begin": "\\{",
+			"end": "\\}",
+			"patterns": [
+				{
+					"include": "#rem-insider"
+				}
+			]
+		},
+		"quoted-string-single": {
+			"begin": "'",
+			"end": "'",
+			"name": "string.quoted.single.parser3ext",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"quoted-string-double": {
+			"begin": "\"",
+			"end": "\"",
+			"name": "string.quoted.double.parser3ext",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		"variable-inline": {
+			"begin": "(\\.|:)(\\[)",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.other.parser3ext"
+				},
+				"2": {
+					"name": "punctuation.section.string.parser3ext"
+				}
+			},
+			"end": "\\]",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.string.parser3ext"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			],
+			"name": "meta.parameters.parser3ext"
+		},
+		"variable-branch": {
+			"match": "[.:]\\$?[\\w\\-]*",
+			"name": "variable.other.parser3ext"
+		},
+		"entities": {
+			"patterns": [
+				{
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.entity.html.parser3ext"
+						},
+						"3": {
+							"name": "punctuation.definition.entity.html.parser3ext"
+						}
+					},
+					"match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
+					"name": "constant.character.entity.html.parser3ext"
+				},
+				{
+					"match": "&",
+					"name": "invalid.illegal.bad-ampersand.html.parser3ext"
+				}
+			]
+		},
+		"tag-generic-attribute": {
+			"match": "\\b([a-zA-Z\\-:]+\\s*=)",
+			"name": "entity.other.attribute-name.html.parser3ext"
+		},
+		"tag-stuff": {
+			"patterns": [
+				{
+					"include": "#tag-generic-attribute"
+				}
+			]
+		}
+	},
+	"scopeName": "source.parser3ext",
+	"uuid": "AF64B54B-CA02-4B85-9D8E-898CD3FF98C8"
+}

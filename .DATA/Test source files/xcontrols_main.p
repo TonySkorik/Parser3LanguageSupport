@@ -175,6 +175,11 @@ xfile
 # может подумать о глобальном объекте, xdoc -- а правила будут такие -- если объект отсутствует - то идект загрузка xml, а если есть -- то работа с ним
 # тогда какую первую функцию дернут та и загрузит xml
 
+#region Test region
+@static:test_static_function[]
+	^sql{}
+#endregion		
+
 #=========================================================================LOG EVERY PROJECT USING THIS FRAMEWORK VERSION
 @reportSelf[][tProjects]
 	^if(-f "${sSystem_lib_path}${xcProjectsTable}"){
