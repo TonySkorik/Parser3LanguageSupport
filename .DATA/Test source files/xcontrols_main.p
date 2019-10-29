@@ -176,9 +176,19 @@ xfile
 # тогда какую первую функцию дернут та и загрузит xml
 
 #region Test region
+
+
 @static:test_static_function[wwsw;locals]
 	^sql{}
-	^static:test_static_fuction[]
+	^test_static_fuction[]
+
+#region Test inner region
+@test_function_1567[]
+	^file:load[]
+	^test_static_function[]
+#endregion
+
+
 #endregion		
 
 #=========================================================================LOG EVERY PROJECT USING THIS FRAMEWORK VERSION

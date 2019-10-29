@@ -44,6 +44,12 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+### 1.3.0
+
+- Switched to json grammar
+- Added `@static:` method prefix syntax highlighting
+- Added `#region <RegionName> ... #endregion` folding constructs
+
 ### 1.2.0
 
 - Refactored comments and methods search logic

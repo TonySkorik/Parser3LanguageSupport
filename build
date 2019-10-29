@@ -1,3 +1,6 @@
+#initial vsce install
+npm install -g vsce
+
 npm cache clean --force
 del node_modules
 npm install
