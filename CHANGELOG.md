@@ -2,6 +2,12 @@
 
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.3.0] - 29.10.2019
+
+- Switched to json grammar
+- Added `@static:` method prefix syntax highlighting
+- Added `#region <RegionName> ... #endregion` folding constructs
+
 ## [1.2.0] - 30.05.2019
 
 - Updated packages (removed vulnerable ones)
@@ -59,7 +65,9 @@ All notable changes to the "parser3-extended-language-support" extension will be
 - Added command to go to method declaration in currently opened file.
 
 ## [1.0.1] - 19.10.2018
+
 - Updated packages
 
 ## [1.0.0] - 19.10.2018
+
 - First public release
