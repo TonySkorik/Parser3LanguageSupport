@@ -44,6 +44,11 @@ If you find any bugs or whant to request a feature - feel free to submit an issu
 
 ## Release Notes
 
+
+### 1.3.1
+
+- Added `region`, `endregion` and `wrapreg` snippets and `ctrl+k ctrl+r` shortcut for wrapping selected text in folding region markers
+
 ### 1.3.0
 
 - Switched to json grammar

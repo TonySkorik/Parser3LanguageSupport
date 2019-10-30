@@ -23,5 +23,28 @@
 			"### </remarks>"
         ],
         "description": "Insert dcumenting comment"
+	},
+	"WrapInRegion":{
+		"prefix": "wrapreg",
+        "body": [
+			"#region ${1:regionName}",
+			"$TM_SELECTED_TEXT",
+			"#endregion"
+        ],
+        "description": "Wrap selected text in folding region"
+	},
+	"Region":{
+		"prefix": "region",
+        "body": [
+			"#region ${1:regionName}"
+        ],
+        "description": "Insert folding region start"
+	},
+	"Endregion":{
+		"prefix": "endregion",
+        "body": [
+			"#endregion"
+        ],
+        "description": "Insert folding region end"
 	}
 }

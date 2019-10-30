@@ -60,6 +60,15 @@
 				"command": "parser3ext.commentAwareTabShift",
 				"key": "Tab",
 				"when": "editorTextFocus && editorLangId == parser3ext"
+			},
+			{
+				"key": "ctrl+k ctrl+r",
+				"command": "editor.action.insertSnippet",
+				"when": "editorTextFocus && editorLangId == parser3ext",
+				"args": {
+				  "langId": "parser3ext",
+				  "name": "WrapInRegion"
+				}
 			}
 		],
 		"commands": [

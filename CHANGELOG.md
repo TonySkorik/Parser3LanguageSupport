@@ -2,6 +2,10 @@
 
 All notable changes to the "parser3-extended-language-support" extension will be documented in this file.
 
+## [1.3.1] - 30.10.2019
+
+- Added `region`, `endregion` and `wrapreg` snippets and `ctrl+k ctrl+r` shortcut for wrapping selected text in folding region markers
+
 ## [1.3.0] - 29.10.2019
 
 - Switched to json grammar

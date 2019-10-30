@@ -188,7 +188,6 @@ xfile
 	^test_static_function[]
 #endregion
 
-
 #endregion		
 
 #=========================================================================LOG EVERY PROJECT USING THIS FRAMEWORK VERSION
